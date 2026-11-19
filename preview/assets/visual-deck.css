@@ -4,7 +4,7 @@
 .vd-controls[hidden],.vd-panel[hidden]{display:none!important}
 .vd-controls button,.vd-close{border:1px solid #8daebc;background:#fff;color:#123f58;border-radius:.3rem;min-height:44px;padding:.3rem .66rem;font:700 .9rem/1.3 system-ui,sans-serif;cursor:pointer}
 .vd-controls button[aria-disabled=true],.vd-controls button:disabled{opacity:.62;cursor:default}
-.vd-controls button:hover:not([aria-disabled=true]),.vd-close:hover{color:#084d43;background:#eaf4ee}
+.vd-controls button:hover:not(:disabled),.vd-close:hover{color:#084d43;background:#eaf4ee}
 .vd-controls [data-vd-motion]{margin-left:.36rem;font-size:.79rem;background:transparent;border:0;text-decoration:underline;text-underline-offset:.18em}
 .vd-index{min-width:3.9rem;color:#365866;text-align:center;font:650 .87rem/1 var(--mono,monospace);white-space:nowrap}
 .vd-track{display:grid;grid-auto-flow:column;grid-auto-columns:100%;gap:12px;min-width:0;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:#8ba8b8 #e8f0f3;scrollbar-width:thin;scroll-behavior:auto;padding-bottom:.32rem}
@@ -72,7 +72,7 @@
 }
 .vd-portrait .vd-controls{justify-content:flex-start;gap:.35rem;margin:0 0 .55rem}
 .vd-portrait .vd-controls button{background:#092538;color:#e3f4f5;border-color:#6e93a9}
-.vd-portrait .vd-controls button:hover:not([aria-disabled=true]){background:#18465b;color:#f0f7f9}
+.vd-portrait .vd-controls button:hover:not(:disabled){background:#18465b;color:#f0f7f9}
 .vd-portrait .vd-controls [data-vd-motion]{background:transparent;border:0;color:#ccdfed;margin:0;padding-inline:.25rem}
 .vd-portrait .vd-index{color:#d2e6f0;min-width:3.6rem}
 .vd-portrait .vd-track{
@@ -98,3 +98,13 @@
  .vd-portrait .vd-controls button,.vd-portrait .vd-index{font-size:.79rem}
 }
 @media(max-width:345px){.vd-portrait .vd-controls{gap:.22rem}.vd-portrait .vd-controls button{padding-inline:.42rem}.vd-portrait .vd-index{min-width:2.7rem}}
+
+/* Drag is an enhancement for mice only; touch, trackpad and page scroll remain native. */
+.vd-hint{color:#48606e;font-size:.81rem;font-weight:590;white-space:nowrap}
+.vd-portrait .vd-hint{color:#c4dce8}
+.vd-track{touch-action:pan-x pan-y pinch-zoom;overscroll-behavior-y:auto}
+.vd-track:focus-visible{outline:3px solid #bc751d;outline-offset:3px}
+.vd-card-button{-webkit-user-select:none;user-select:none}
+.vd-art img{-webkit-user-drag:none}
+.vd-track[data-vd-dragging=true]{scroll-snap-type:none;scroll-behavior:auto}
+@media(any-pointer:fine){.vd-card-button{cursor:grab}.vd-track[data-vd-dragging=true],.vd-track[data-vd-dragging=true] .vd-card-button{cursor:grabbing}}

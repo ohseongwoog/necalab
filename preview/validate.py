@@ -66,7 +66,8 @@ for r in fields:
 print('PASS homepage section order, strict academic output selection, five bilingual areas and five original vector diagrams.')
 
 for page in (h,research_page()):
- assert 'data-deck-prev' in page and 'data-deck-next' in page and 'data-deck-index' in page
+ assert 'data-deck-prev' not in page and 'data-deck-next' not in page and 'data-deck-index' in page
+ assert 'Swipe or drag' in page and 'aria-keyshortcuts="ArrowLeft ArrowRight Home End Enter Space"' in page
  assert page.count('data-deck-card')==5 and 'data-deck-track' in page
 assert 'vd-portrait' in h and 'vd-portrait' not in research_page()
 assert h.count('data-visual-deck')==1 and h.count('type="range"')==6
