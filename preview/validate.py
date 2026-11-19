@@ -43,7 +43,10 @@ assert len(fields)==len({r['id'] for r in fields})==5
 for r in fields:
  assert r['image'].startswith('assets/field-') and r['image'].endswith('.svg')
  root=ET.parse(P/r['image']).getroot()
- assert root.tag=='{http://www.w3.org/2000/svg}svg' and root.attrib.get('viewBox')=='0 0 560 280'
+ assert root.tag=='{http://www.w3.org/2000/svg}svg' and root.attrib.get('viewBox')=='0 0 800 400'
+ assert sum('art-fx' in el.get('class','').split() for el in root.iter()) >= 3
+ assert any(el.tag.endswith('linearGradient') for el in root.iter())
+ assert any(el.tag.endswith('radialGradient') for el in root.iter())
  assert not root.findall('.//{http://www.w3.org/2000/svg}image') and not root.findall('.//{http://www.w3.org/2000/svg}script')
  for k in ['summary','summaryKo']:
   assert 0<len(re.findall(r'[.!?](?:\s|$)',r[k]))<=2,r['id']
@@ -62,6 +65,13 @@ for page in (h,research_page()):
  assert 'data-deck-prev' in page and 'data-deck-next' in page and 'data-deck-index' in page
  assert page.count('data-deck-card')==5 and 'data-deck-track' in page
 assert 'data-angle=' not in h and 'scan-pattern' not in h and 'id="lab-news"' in h
-assert all(('href="#puzzle-'+key+'"') in h and ('data-game="'+key+'"') in h for key in ('ai','rf'))
-assert 'fictional records' in h and 'live AI model' in h
-print('PASS two interactive puzzle entry points, news before game boards, and five accessible swipe cards on both pages.')
+assert all(('href="#lab-'+key+'"') in h and ('data-lab="'+key+'"') in h for key in ('ai','rf'))
+assert 'data-game=' not in h and not (P/'assets/puzzles.js').exists()
+for page in (h,research_page()):
+ assert page.count('data-art-play=')==5 and page.count('data-art-expand=')==5 and page.count('field-fx-layer')==5
+ for field in fields:assert 'data-art-play="'+field['id']+'"' in page
+for name in ['lab-ai','lab-rf']:
+ js=(P/('assets/'+name+'.js')).read_text()
+ for api in ['fetch(', 'XMLHttpRequest', 'sendBeacon(', 'localStorage.', 'sessionStorage.']:assert api not in js,(name,api)
+assert 'ta.spellcheck=false' in (P/'assets/lab-ai.js').read_text()
+print('PASS two interactive workbenches, zero old quiz controls, local-only input processing, animated and expandable diagrams across both decks.')
