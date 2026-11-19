@@ -1,0 +1,32 @@
+/* Two miniature, live instruments. No disclosure, tabs, or alternate input modes. */
+.hero-inner{min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,.96fr);gap:5%;padding-block:31px}
+.micro-labs{width:100%;display:grid;gap:10px;min-width:0}
+.micro-card{--sky:#a8e2f6;--line:#45657e;position:relative;min-width:0;color:#f5fbff;background:linear-gradient(118deg,#103858,#082844 95%);border:1px solid #60859f;border-radius:9px;padding:13px 16px 11px;box-shadow:0 5px 19px #09244326;scroll-margin-top:12px}
+.micro-card[data-lab=rf]{--sky:#b3e8c8;background:linear-gradient(118deg,#103849,#092a42 95%)}
+.micro-head,.micro-title,.micro-display,.micro-scale,.micro-link-state{display:flex;align-items:center}
+.micro-head{justify-content:space-between;gap:8px;min-width:0}.micro-title{gap:9px}.micro-tag{border:1px solid #7798af;border-radius:4px;padding:2px 4px;color:var(--sky);font:700 .72rem/1.18 var(--mono);letter-spacing:.04em}
+.micro-title h2{font-size:clamp(1.08rem,1.3vw,1.26rem);line-height:1.24;letter-spacing:-.027em;font-weight:710}
+.micro-kind{color:#ccdee7;font-size:.75rem;line-height:1.2;text-align:right;white-space:nowrap}
+.micro-help{margin:3px 0 5px;color:#e0edf4;font-size:.9rem;line-height:1.43}
+.micro-display{min-height:40px;min-width:0;justify-content:space-between;gap:8px}
+.micro-ai-plot{display:grid;grid-template-columns:minmax(0,.95fr) minmax(37px,.68fr) minmax(62px,.73fr);align-items:center;column-gap:7px;min-width:0;width:100%}
+.micro-inputs{display:grid;gap:2px;min-width:0}.micro-inputs>span{display:flex;gap:5px;align-items:center;min-width:0;font-size:.78rem;line-height:1.27;color:#d6f0ff;white-space:nowrap}.micro-inputs>span:nth-child(2){color:#e7d9a8}.micro-inputs svg{width:14px;flex:none;height:14px}
+.micro-net{min-width:0}.micro-net svg{width:100%;height:40px;overflow:visible}
+.micro-inference{display:grid;justify-items:end;text-align:right;line-height:1.12;min-width:0}.micro-inference small{font-size:.7rem;color:#c1d6e5}.micro-inference [data-outcome]{margin-top:3px;color:#e4f5ff;font-weight:750;font-size:.98rem}.micro-card[data-state=hardware] .micro-inference [data-outcome]{color:#ffe7ac}
+.micro-rf-plot{min-width:0;flex:1}.micro-rf-plot svg{width:100%;height:43px;overflow:visible}
+.micro-link-state{justify-content:flex-end;gap:4px;flex:none;line-height:1.15;color:#c8f8d6;font-size:.91rem;font-weight:710}
+.micro-link-state svg{border:1px solid currentColor;border-radius:50%;width:15px;height:15px;flex:none}
+.micro-link-state .second-state,.micro-card[data-state=disconnected] .micro-link-state .first-state{display:none}.micro-card[data-state=disconnected] .micro-link-state .second-state{display:inline}
+.micro-card[data-state=disconnected] .micro-link-state{color:#e0e6ea}.micro-card[data-state=disconnected] [data-wave]{stroke:#aebdc8}
+.micro-range{display:block;appearance:none;-webkit-appearance:none;box-sizing:border-box;width:100%;height:38px;min-height:38px;padding:0;margin:-2px 0 -4px;border:0;outline-offset:0;background:transparent;cursor:pointer;touch-action:pan-y;direction:ltr;accent-color:var(--sky)}
+.micro-range::-webkit-slider-runnable-track{height:4px;border-radius:9px;background:linear-gradient(to right,var(--sky) var(--pos,48%),#66859a var(--pos,48%))}
+.micro-range::-moz-range-track{height:4px;border-radius:9px;background:#66859a}.micro-range::-moz-range-progress{height:4px;border-radius:9px;background:var(--sky)}
+.micro-range::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:23px;height:23px;margin-top:-9.5px;border:3px solid #f6faff;border-radius:50%;background:#1b5875;box-shadow:0 1px 2px #0007}
+.micro-range::-moz-range-thumb{box-sizing:border-box;width:23px;height:23px;border:3px solid #f6faff;border-radius:50%;background:#1b5875}
+.micro-range:focus-visible{outline:2px solid #f2d772;outline-offset:0;border-radius:4px}.micro-card[data-lab=rf] .micro-range{--pos:46.67%}.micro-range:disabled{opacity:.7}
+.micro-scale{justify-content:space-between;gap:6px;font-size:.74rem;line-height:1.25;color:#cddde8}.micro-scale>span:first-child,.micro-scale>span:last-child{flex:1}.micro-scale>span:last-child{text-align:right}.micro-scale [data-meter]{color:#f2f8fc;text-align:center;font-variant-numeric:tabular-nums;font-weight:660}
+.micro-sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);border:0;white-space:nowrap}.micro-alias{position:absolute;inset:0 auto auto 0;width:1px;height:1px;pointer-events:none;scroll-margin-top:12px}
+@media(max-width:970px){.hero-inner{gap:3%}.micro-card{padding:11px 12px 10px}}
+@media(max-width:760px){.hero-inner{grid-template-columns:1fr;gap:17px;padding-block:23px}.micro-labs{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.micro-help{font-size:.86rem}.micro-range{height:44px;margin-top:-5px;margin-bottom:-8px}}
+@media(max-width:600px){.micro-labs{grid-template-columns:1fr;gap:8px}.micro-card{padding:10px 13px 10px}.hero-inner{padding-block:21px;gap:14px}.hero h1{margin:9px 0}.hero-copy>p{font-size:.94rem;line-height:1.48}.hero .actions{margin-top:12px}.hero .btn{min-height:39px}}
+@media(forced-colors:active){.micro-card,.micro-tag{border-color:CanvasText}.micro-range{appearance:auto;-webkit-appearance:auto}.micro-range:focus-visible{outline-color:Highlight}.micro-inputs svg,.micro-link-state{color:CanvasText}.micro-rf-plot svg,.micro-net svg{background:#0b2c49;forced-color-adjust:none}}

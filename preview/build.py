@@ -1,13 +1,12 @@
 """Generate the six static NECA preview pages. Python standard library only."""
 from pathlib import Path
 from html import escape
+from micro_labs import hero_labs
+from visual_deck import deck as visual_deck
 import hashlib, json, re
-from xml.etree import ElementTree as ET
-ET.register_namespace("", "http://www.w3.org/2000/svg")
 P=Path(__file__).resolve().parent
 def x(t): return escape(str(t or ''),quote=True)
 def pair(ko,en): return '<span class="ko" lang="ko">'+x(ko)+'</span><span class="en" lang="en">'+x(en)+'</span>'
-def diagram(r):return '<img src="'+x(r['image'])+'?v='+hashlib.sha256((P/r['image']).read_bytes()).hexdigest()[:9]+'" loading="lazy" decoding="async" width="800" height="400" alt="'+x(r['altKo'])+'" data-alt-ko="'+x(r['altKo'])+'" data-alt-en="'+x(r['alt'])+'">'
 def tag(t):return '<span class="eyebrow">'+x(t)+'</span>'
 def img(src,description='',cls='',lazy=True):return '<img class="'+x(cls)+'" src="'+x(src)+'" alt="'+x(description)+'" decoding="async" '+('loading="lazy"' if lazy else 'fetchpriority="high"')+'>'
 def button(href,ko,en,cls=''):return '<a class="btn '+x(cls)+'" href="'+x(href)+'">'+pair(ko,en)+'</a>'
@@ -42,60 +41,17 @@ def brand():
  if logo: return img(logo,'NECA Lab.','brand-mark',False)+'<span class="brand-word">NECA <span>Lab.</span></span>'
  return '<span class="brand-word">NECA <span>Lab.</span></span>'
 def nav(pg):return ''.join('<a href="'+name+'.html"'+(' aria-current="page"' if pg==name else '')+'>'+pair(ko,en)+'</a>' for name,ko,en in pages)
+def asset(filename):
+ path='assets/'+filename
+ return path+'?v='+hashlib.sha256((P/path).read_bytes()).hexdigest()[:9]
+
 def shell(pg,content,kt,et):
  title='NECA Lab. · '+kt+' / '+et
- extra=('<link href="assets/interact.css?v=2" rel="stylesheet"><link href="assets/field-motion.css?v=1" rel="stylesheet"><script defer src="assets/deck.js?v=1"></script><script defer src="assets/field-motion.js?v=1"></script>' if pg in ('index','research') else '')+('<link href="assets/lab-ai.css?v=1" rel="stylesheet"><link href="assets/lab-rf.css?v=1" rel="stylesheet"><script defer src="assets/lab-ai.js?v=1"></script><script defer src="assets/lab-rf.js?v=1"></script>' if pg=='index' else '')
+ extra=''
+ if pg in ('index','research'):extra+='<link href="'+asset('visual-deck.css')+'" rel="stylesheet"><script defer src="'+asset('visual-deck.js')+'"></script>'
+ if pg=='index':extra+='<link href="'+asset('micro-labs.css')+'" rel="stylesheet"><script defer src="'+asset('micro-labs.js')+'"></script>'
  return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#003987"><meta name="description" content="서울시립대학교 차세대 전자파 회로 및 응용 연구실 | NECA Lab., University of Seoul."><title>{x(title)}</title><link href="assets/site.css?v=3" rel="stylesheet"><script defer src="assets/site.js?v=3"></script>{extra}</head>
 <body data-page="{pg}"><a class="skip" href="#main">{pair('본문 바로가기','Skip to content')}</a><header><div class="top"><div class="wrap"><span>{pair('서울시립대학교 · 전자전기컴퓨터공학부','University of Seoul · School of Electrical and Computer Engineering')}</span><span class="preview"><i></i>{pair('디자인 시안','Design preview')}</span></div></div><div class="bar wrap"><a class="brand" href="index.html" aria-label="NECA Lab. Home">{brand()}</a><nav id="navigation" aria-label="메인 메뉴 / Main menu">{nav(pg)}</nav><div class="nav-controls"><button type="button" id="language" hidden><span class="ko" lang="en">EN</span><span class="en" lang="ko">한국어</span></button><button type="button" class="hamb" id="menu-trigger" aria-expanded="false" aria-controls="navigation" aria-label="메뉴 / Menu" hidden><span></span><span></span></button></div></div></header><main id="main">{content}</main><footer><div class="foot-main wrap"><div><div class="foot-logo">NECA <span>Lab.</span></div><p>{pair('차세대 전자파 회로 및 응용 연구실','Next-gen. Electromagnetic Circuits and Application Lab.')}<br>{pair('서울시립대학교 전자전기컴퓨터공학부','School of Electrical and Computer Engineering, University of Seoul')}</p></div><div class="footer-links"><a href="mailto:{piemail}">{piemail}</a><a href="{legacy}/home">{pair('현행 연구실 홈페이지','Current lab website')}</a><a href="https://www.uos.ac.kr/">{pair('서울시립대학교','University of Seoul')}</a></div></div><div class="foot-base wrap"><span>NECA Lab. · University of Seoul</span><span>{pair('검토용 디자인 시안','Website design preview')}</span></div></footer></body></html>'''
-def activity_icon(g):
- if g=='ai':
-  v='<g fill="none" stroke="#80b7c8" stroke-width="1.3"><path d="m10 15 23-7-1 17-22-10 22 28L10 34l22-9 23-10-23-7 24 29-24-12m0 18 24-6"/></g><g fill="#a8d7df" stroke="#d7f2ed"><circle cx="10" cy="15" r="3.3"/><circle cx="10" cy="34" r="3.3"/><circle cx="32" cy="8" r="3.4"/><circle cx="32" cy="25" r="4"/><circle cx="32" cy="43" r="3.4"/></g><g fill="#d4ed8e"><circle cx="56" cy="15" r="4"/><circle cx="56" cy="37" r="4"/></g>'
- else:
-  v='<g fill="none" stroke="#a5d4db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 29h8m0-8v17l14-9-14-8zm15 8h7l2-4 3 8 3-8 2 4h4v-9m0 2-6-9m6 9 6-9"/><path d="M54 18q7 6 0 12m4-15q10 9 0 18" stroke="#cfeaa0"/></g>'
- return '<svg class="activity-icon" viewBox="0 0 66 52" aria-hidden="true" focusable="false">'+v+'</svg>'
-activities=[
- ('ai','AI 신경망 실험대','Neural network lab','문장과 표의 비중을 바꾸면 결과는?','What changes when text or table data gets more weight?','문장과 표를 편집하고 가중치와 층 수를 조절해 출력의 변화를 관찰하세요.','Edit text and table values, then change weights and depth to see the output shift.'),
- ('rf','RF 링크 실험대','Radio link lab','수신 안테나를 움직이면 신호는?','What happens when you move the receiving antenna?','회로를 조립하고 수신 안테나를 옮기거나 돌린 뒤 신호를 보내세요.','Assemble the circuit, move or rotate the receiving antenna, and transmit.')]
-def gateway():
- h='<aside class="gateway" aria-label="가상 실험실 / Virtual labs"><div class="gateway-head"><span>'+pair('가상 실험실','Virtual labs')+'</span><small>'+pair('직접 조작','Hands-on')+'</small></div>'
- for g,ko,en,qk,qe,sk,se in activities:
-  h+='<a class="gateway-link" href="#lab-'+g+'"><span class="gateway-icon">'+activity_icon(g)+'</span><span class="gateway-text"><strong>'+pair(ko,en)+'</strong><span>'+pair(qk,qe)+'</span></span><span class="gateway-play">'+pair('열기','Open')+'</span></a>'
- return h+'</aside>'
-def bench():
- h='<section class="bench" id="hands-on"><div class="wrap section">'+sect('VIRTUAL LAB','직접 해보는 실험','Hands-on experiments')+'<div class="challenges">'
- for g,ko,en,qk,qe,sk,se in activities:
-  h+='<details class="challenge" id="lab-'+g+'"><summary><span class="challenge-symbol">'+activity_icon(g)+'</span><span class="challenge-caption"><strong>'+pair(ko,en)+'</strong><span>'+pair(sk,se)+'</span></span><span class="challenge-open" aria-hidden="true"></span></summary><div data-lab="'+g+'"></div><noscript><p class="script-note">'+pair('실험을 조작하려면 브라우저의 자바스크립트를 켜 주세요.','Enable JavaScript in your browser to use the interactive controls.')+'</p></noscript></details>'
- return h+'</div></div></section>'
-outcomes={
- 'radar':('송신 펄스가 매설물에 닿은 뒤, 뒤늦게 도착한 반사파가 시간 기록에 나타납니다.','The pulse reaches the buried object; its returning echo appears later on the trace.'),
- 'rf-design':('결합기에 신호를 흘려 여러 회로 후보의 주파수 응답을 목표 곡선과 비교합니다.','The coupler carries the signal; candidate responses are compared against the target curve.'),
- 'interconnects':('A의 신호 변화가 수직 배선을 지나면 이웃 B에 더 작은 과도 응답이 나타납니다.','A step travels along A; coupling induces a smaller transient on B.'),
- 'plasma':('전력이 도파관을 따라 안테나에 도달하고, 파면이 플라스마 가장자리로 진행합니다.','Power reaches the launcher through the waveguide. Wavefronts then enter the plasma edge.'),
- 'grounded-ai':('선택한 근거 문장 S2를 검색 경로로 따라가면 같은 출처 표시가 답변에 붙습니다.','The selected passage follows the retrieval path and appears beside the answer with the same S2 citation.')}
-def scene(r):
- key=r['id'];root=ET.parse(P/r['image']).getroot();parts=[]
- for el in root.iter():
-  if 'art-fx' in el.get('class','').split():
-   part=ET.tostring(el,encoding='unicode').replace(' xmlns="http://www.w3.org/2000/svg"','')
-   parts.append(part)
- assert len(parts)>=3
- over='<svg class="field-fx-layer" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">'+''.join(parts)+'</svg>'
- alt_id='diagram-text-'+key;btn='<button type="button" class="field-art" data-art-play="'+x(key)+'" data-art-state="idle" aria-describedby="'+alt_id+'" aria-label="'+x(r['titleKo']+' 원리 재생')+'" data-name-ko="'+x(r['titleKo'])+'" data-name-en="'+x(r['title'])+'">'+diagram(r)+over+'<span class="art-control" aria-hidden="true"><span class="art-icon"></span><span class="art-play-word">'+pair('원리 재생','Play diagram')+'</span><span class="art-again-word">'+pair('다시 재생','Replay')+'</span><span class="art-still-word">'+pair('최종 상태 보기','Show final state')+'</span></span></button>'
- return '<figure class="deck-figure field-figure">'+btn+'<figcaption id="'+alt_id+'" class="art-caption" aria-live="polite" aria-atomic="true"><span data-art-original>'+pair(r['captionKo'],r['caption'])+'</span><span data-art-outcome hidden>'+pair(*outcomes[key])+'</span></figcaption><button class="art-expand" type="button" data-art-expand="'+x(key)+'">'+pair('크게 보기','Enlarge diagram')+'</button></figure>'
-def deck(rich=False):
- key='fields' if rich else 'focus';track=key+'-track'
- h='<div class="research-deck '+('deck-rich' if rich else 'deck-brief')+'" data-deck role="region" aria-label="연구 분야 카드"><div class="deck-bar"><p class="deck-help">'+pair('옆으로 넘겨 탐색하고, 그림을 눌러 원리를 보세요.','Swipe to browse. Select a diagram to see how it works.')+'</p><div class="deck-tools" hidden><button type="button" data-deck-prev aria-controls="'+track+'">'+pair('이전','Previous')+'</button><span data-deck-index class="deck-index" role="status" aria-live="polite" aria-atomic="true"></span><button type="button" data-deck-next aria-controls="'+track+'">'+pair('다음','Next')+'</button></div></div><div id="'+track+'" class="deck-track" data-deck-track tabindex="0" aria-label="연구 분야 목록">'
- for r in research:
-  if rich:
-   h+='<article class="deck-card pillar" data-deck-card id="'+x(r['id'])+'" tabindex="-1" aria-labelledby="title-'+x(r['id'])+'">'+scene(r)+'<div class="deck-copy"><h2 id="title-'+x(r['id'])+'">'+r_name(r)+'</h2><p>'+r_sum(r)+'</p>'
-   if r.get('example'):
-    ex=r['example'];h+='<div class="related"><span class="eyebrow">'+pair('공개 연구 사례','Explore an example')+'</span><a href="'+x(ex['href'])+'">'+pair(ex['labelKo'],ex['label'])+'</a></div>'
-   h+='</div></article>'
-  else:
-   h+='<article class="deck-card" data-deck-card>'+scene(r)+'<a class="deck-brief-link" href="research.html#'+x(r['id'])+'"><div class="deck-copy"><h3>'+r_name(r)+'</h3><span class="deck-blurb">'+pair(r['shortKo'],r['short'])+'</span></div></a></article>'
- return h+'</div></div>'
-def r_name(r):return pair(r['titleKo'],r['title'])
-def r_sum(r):return pair(r['summaryKo'],r['summary'])
 def n_name(z):return pair(z['titleKo'],z['title'])
 def n_sum(z):return pair(z['summaryKo'],z['summary'])
 def recent_outputs(records):
@@ -115,23 +71,22 @@ def home_news():
  h+=news_entry(lead,True)+'<div class="bulletin-more">'+''.join(news_entry(z,False) for z in highlights if z)+'</div></div></div></section>'
  return h
 def home_areas():
- return '<section class="wrap section focus-section" id="research-areas">'+sect('RESEARCH','연구 분야','Our research','research.html','연구 자세히 보기','Explore our research')+deck()+'</section>'
+ return '<section class="wrap section focus-section" id="research-areas" lang="en"><div class="sect-head"><div>'+tag('RESEARCH')+'<h2>Our research</h2></div><a class="text-link" href="research.html">Explore our research</a></div>'+visual_deck(research)+'</section>'
 def home_outputs():
  journals,talks=recent_outputs(pubs)
  def column(rows,ko,en):
   return '<div class="output-group"><h3>'+pair(ko,en)+'</h3><ul>'+''.join('<li data-kind="'+x(r['type'])+'"><span class="output-meta"><i lang="en">'+x(r['venue'])+'</i> · '+x(r['year'])+'</span><h4 lang="en"><a href="publications.html#'+x(r['id'])+'">'+x(r['title'])+'</a></h4></li>' for r in rows)+'</ul></div>'
  return '<section class="tint" id="recent-outputs"><div class="wrap section">'+sect('PUBLICATIONS','최근 연구 성과','Recent research outputs','publications.html','성과 전체 보기','All publications')+'<div class="output-grid">'+column(journals,'저널 논문','Peer-reviewed journals')+column(talks,'국제학회 발표','International conference presentations')+'</div></div></section>'
 def home():
- h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+gateway()+'</div></section>'
- h+=home_news()+bench()+home_areas()+home_outputs()
+ h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+hero_labs()+'</div></section>'
+ h+=home_news()+home_areas()+home_outputs()
  return h+'<section class="section wrap"><div class="team-strip"><div>'+tag('PEOPLE')+'<h2>'+pair('연구실 구성원','Meet the team')+'</h2></div><div><p>'+pair('전자파와 회로를 함께 연구하는 사람들을 소개합니다.','Meet the people studying electromagnetic waves and circuits together.')+'</p>'+txtlink('people.html','구성원 소개','Browse people')+'</div></div></section>'
 def concept():
  orig=(img(logo,'NECA Lab. original mark','logo-example')+'<span>'+pair('기존 로고','Original mark')+'</span>') if logo else ''
  return '<details class="concept"><summary>'+pair('연구실 로고 디자인 제안','Lab identity design study')+'</summary><div class="concept-grid">'+('<div class="mark-tile">'+orig+'</div>' if orig else '')+'<div class="mark-tile">'+img('assets/em-ai-study.svg','Proposed symbol: perpendicular fields and a circuit trace','logo-example')+'<span>'+pair('EM × AI · 제안안','EM × AI · concept only')+'</span></div><p>'+pair('전기장과 자기장의 직교 관계를 두 축으로, 전파 방향을 따라 이어지는 점을 회로·AI 연결선으로 표현했습니다. 기존 로고를 대체하지 않습니다.','Two axes represent orthogonal electric and magnetic fields. A line of circuit nodes suggests propagation and AI connections. This is a separate concept, not a replacement for the original.')+'</p></div></details>'
 def research_page():
- h=pagehead('RESEARCH','연구 분야','Research','다섯 연구 분야에서 우리가 풀고 있는 문제를 소개합니다. 그림은 원리를 설명한 개념도이며 측정 결과가 아닙니다.','Explore the questions behind our five research fields. The diagrams illustrate principles, not measured results.')
- h+='<div class="wrap section areas"><details class="topic-index"><summary>'+pair('분야 바로가기','Jump to a field')+'</summary><div class="topic-links" role="navigation" aria-label="연구 분야 바로가기 / Research fields">'+''.join('<a href="#'+x(r['id'])+'">'+r_name(r)+'</a>' for r in research)+'</div></details>'+deck(True)
- return h+concept()+'</div>'
+ h='<section class="intro" lang="en"><div class="wrap">'+tag('NECA LAB. / RESEARCH')+'<h1>Research</h1></div></section>'
+ return h+'<div class="wrap section areas">'+visual_deck(research, rich=True)+concept()+'</div>'
 def people_page():
  h=pagehead('PEOPLE','구성원','People','연구책임자와 대학원 연구원들을 소개합니다.','Meet our principal investigator and graduate researchers.')
  a=people[0]; photo=img(a['image'],'Seongwoog Oh',lazy=False) if a.get('image') else '<span class="initials">SO</span>'

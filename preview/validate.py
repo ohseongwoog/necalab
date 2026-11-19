@@ -51,27 +51,34 @@ for r in fields:
  for k in ['summary','summaryKo']:
   assert 0<len(re.findall(r'[.!?](?:\s|$)',r[k]))<=2,r['id']
  for k in ['short','shortKo','caption','captionKo','alt','altKo']:assert r[k].strip(),r['id']
-h=home(); order=['class="hero"','id="lab-news"','id="hands-on"','id="research-areas"','id="recent-outputs"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
+h=home(); order=['class="hero"','id="hands-on"','id="lab-news"','id="research-areas"','id="recent-outputs"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
 j,c=recent_outputs(d['publications']);assert len(j)==len(c)==2
 assert all(r['type']=='journal' and r['peerReviewed'] is True for r in j)
 assert all(r['type']=='conference' and r['international'] is True and r['presentationDate'] for r in c)
 assert recent_outputs([{'type':'news'},{'type':'journal','peerReviewed':False},{'type':'conference','international':True}])==([],[])
 for r in j+c:assert f'publications.html#{r["id"]}' in h
 for r in fields:
- assert f'research.html#{r["id"]}' in h and r['altKo'] in research_page()
+ assert 'id="'+r['id']+'"' in h and 'id="'+r['id']+'"' in research_page()
 print('PASS homepage section order, strict academic output selection, five bilingual areas and five original vector diagrams.')
 
 for page in (h,research_page()):
  assert 'data-deck-prev' in page and 'data-deck-next' in page and 'data-deck-index' in page
  assert page.count('data-deck-card')==5 and 'data-deck-track' in page
-assert 'data-angle=' not in h and 'scan-pattern' not in h and 'id="lab-news"' in h
-assert all(('href="#lab-'+key+'"') in h and ('data-lab="'+key+'"') in h for key in ('ai','rf'))
-assert 'data-game=' not in h and not (P/'assets/puzzles.js').exists()
-for page in (h,research_page()):
- assert page.count('data-art-play=')==5 and page.count('data-art-expand=')==5 and page.count('field-fx-layer')==5
- for field in fields:assert 'data-art-play="'+field['id']+'"' in page
-for name in ['lab-ai','lab-rf']:
- js=(P/('assets/'+name+'.js')).read_text()
- for api in ['fetch(', 'XMLHttpRequest', 'sendBeacon(', 'localStorage.', 'sessionStorage.']:assert api not in js,(name,api)
-assert 'ta.spellcheck=false' in (P/'assets/lab-ai.js').read_text()
-print('PASS two interactive workbenches, zero old quiz controls, local-only input processing, animated and expandable diagrams across both decks.')
+assert h.count('type="range"')==2 and all(('id="lab-'+key+'-range"') in h and ('id="puzzle-'+key+'"') in h for key in ('ai','rf'))
+assert 'class="challenge"' not in h and 'data-game=' not in h and 'data-wave' in h
+assert 'data-vd-open' in h and 'class="field-art"' not in h and 'data-art-expand' not in h
+for label in ['textarea','select','button','details','input type="text"']:
+ off=h.split('id="hands-on"',1)[1].split('</aside>',1)[0]
+ assert ('<'+label) not in off, label
+for key in ['assets/micro-labs.js','assets/visual-deck.js']:
+ js=(P/key).read_text()
+ for api in ['fetch(', 'XMLHttpRequest', 'sendBeacon(', 'localStorage.', 'sessionStorage.']:assert api not in js,(key,api)
+for old in ['lab-ai.js','lab-rf.js','lab-ai.css','lab-rf.css','puzzles.js','deck.js','field-motion.js','interact.css','field-motion.css']:
+ assert not (P/'assets'/old).exists(),old
+for page in [h,research_page()]:
+ assert page.count(' data-vd-open')==5 and page.count(' data-vd-panel')==5
+ for r in fields:assert 'data-field="'+r['id']+'"' in page
+ for m in re.finditer(r'<button [^>]*data-vd-open.*?</button>',page,re.S):
+  assert not re.search(r'<p\b',m.group()) and 'class="vd-heading"' in m.group()
+  assert not re.search(r'[가-힣]',m.group())
+print('PASS two one-slider models, native direct links, five English visual disclosures, public sources and no legacy workbenches.')

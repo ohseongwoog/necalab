@@ -1,0 +1,65 @@
+/* Art leads the gallery: a single landscape frame and title per card. */
+.visual-deck{--vd-ink:#113248;--vd-blue:#1b5370;--vd-border:#a6bdc8;max-width:1020px;margin-inline:auto;min-width:0}
+.vd-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.45rem;margin:0 0 .58rem}
+.vd-controls[hidden],.vd-panel[hidden]{display:none!important}
+.vd-controls button,.vd-close{border:1px solid #8daebc;background:#fff;color:#123f58;border-radius:.3rem;min-height:44px;padding:.3rem .66rem;font:700 .9rem/1.3 system-ui,sans-serif;cursor:pointer}
+.vd-controls button[aria-disabled=true],.vd-controls button:disabled{opacity:.62;cursor:default}
+.vd-controls button:hover:not([aria-disabled=true]),.vd-close:hover{color:#084d43;background:#eaf4ee}
+.vd-controls [data-vd-motion]{margin-left:.36rem;font-size:.79rem;background:transparent;border:0;text-decoration:underline;text-underline-offset:.18em}
+.vd-index{min-width:3.9rem;color:#365866;text-align:center;font:650 .87rem/1 var(--mono,monospace);white-space:nowrap}
+.vd-track{display:grid;grid-auto-flow:column;grid-auto-columns:100%;gap:12px;min-width:0;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:#8ba8b8 #e8f0f3;scrollbar-width:thin;scroll-behavior:auto;padding-bottom:.32rem}
+.vd-card{overflow:hidden;min-width:0;scroll-snap-align:start;border-radius:6px;background:#082737;isolation:isolate}
+.vd-card-button{position:relative;display:block;text-align:left;min-height:0;width:100%;height:100%;padding:0;border:0;border-radius:inherit;color:white;background:#0b263a;cursor:pointer;font:inherit}
+.vd-card-button:focus-visible{outline:4px solid #f8cb77;outline-offset:-5px}
+.vd-art{position:relative;isolation:isolate;display:block;width:100%;aspect-ratio:16/10;overflow:hidden;background:radial-gradient(ellipse at 60% 44%,#183f51 0%,#0e3145 56%,#0b2638 100%)}
+.vd-art::after{content:"";position:absolute;inset:auto 0 0;height:23%;background:linear-gradient(transparent,#091f30);pointer-events:none}
+.vd-art img,.vd-overlay{display:block;width:100%;height:100%;max-width:none;position:absolute;inset:0;object-fit:contain;object-position:center top;pointer-events:none}
+.vd-heading{display:block;position:absolute;left:clamp(.78rem,3vw,1.8rem);right:1rem;bottom:clamp(.55rem,2.1vw,1.48rem);color:#fff;font-family:inherit;font-weight:770;font-size:clamp(1.24rem,3.8vw,2.7rem);letter-spacing:-.04em;line-height:1.12;text-wrap:balance;text-shadow:0 1px 12px #041c2a;overflow-wrap:anywhere}
+[data-vd-open][aria-expanded=true] .vd-heading{color:#e3f8b7}
+.vd-panel{margin-top:.7rem;padding:clamp(.78rem,2vw,1.2rem);border:1px solid #a3c3ba;border-left:5px solid #00745d;background:#eff6f1;color:#163e42;border-radius:.35rem}
+.vd-panel:focus{outline:2px solid #9b6a18;outline-offset:2px}
+.vd-panel h3{margin:0 0 .26rem;color:#16463e;font-size:clamp(1.05rem,2vw,1.32rem);line-height:1.24}
+.vd-panel p{margin:.2rem 0 .55rem;line-height:1.55;max-width:54em}
+.vd-reference{display:block;width:fit-content;margin:.32rem 0;color:#124a68;font-weight:650;text-underline-offset:.2em;text-decoration:underline;font-size:.88rem}
+.vd-close{margin-top:.3rem;min-height:44px}.vd-static{margin:.45rem 0;padding:.5rem .7rem;border:1px solid #9bb8c6}.vd-static summary{cursor:pointer;font-weight:700}.vd-static p{margin:.5rem 0}
+.vd-art .art-fx{opacity:0;pointer-events:none}
+.vd-art .flow-first{--vd-seq:vd-flow-first}.vd-art .flow-middle{--vd-seq:vd-flow-middle}.vd-art .flow-late{--vd-seq:vd-flow-late}
+.vd-art .draw-first{--vd-seq:vd-draw-first}.vd-art .draw-middle{--vd-seq:vd-draw-middle}.vd-art .draw-end{--vd-seq:vd-draw-end}
+.vd-art .accent-source{--vd-seq:vd-accent-source}.vd-art .accent-echo{--vd-seq:vd-accent-echo}
+.vd-art .wave-1{--vd-seq:vd-wave-1}.vd-art .wave-2{--vd-seq:vd-wave-2}.vd-art .wave-3{--vd-seq:vd-wave-3}.vd-art .wave-4{--vd-seq:vd-wave-4}
+[data-vd-loop=true] .vd-art .art-fx{animation:var(--vd-seq,none) 6s ease-in-out infinite both}
+[data-vd-reveal=true] .vd-art :is(.draw-end,.wave-4,.accent-echo){opacity:.95;stroke-dashoffset:0;animation:none}
+/* Deliberate taps replay a faster, named sequence distinct from the ambient loop. */
+[data-vd-play=true] .vd-art .art-fx{opacity:0;animation:var(--vd-hit,none) 2.65s ease-in-out both}
+[data-vd-play=true] [class~="radar-down"],[data-vd-play=true] [class~="plasma-feed"],[data-vd-play=true] [class~="ai-query"]{--vd-hit:vd-hit-launch}
+[data-vd-play=true] [class~="radar-return"],[data-vd-play=true] [class~="rf-field"],[data-vd-play=true] [class~="chip-through"],[data-vd-play=true] [class~="ai-route"]{--vd-hit:vd-hit-travel}
+[data-vd-play=true] [class~="rf-candidate-1"],[data-vd-play=true] [class~="chip-drive"]{--vd-hit:vd-hit-early-plot}
+[data-vd-play=true] [class~="rf-candidate-2"]{--vd-hit:vd-hit-middle-plot}
+[data-vd-play=true] :is(.radar-read,.rf-candidate-3,.chip-couple,.ai-cite){--vd-hit:vd-hit-result}
+[data-vd-play=true] .accent-echo{--vd-hit:vd-hit-echo}
+[data-vd-play=true] .wave-1{--vd-hit:vd-hit-wave-1}[data-vd-play=true] .wave-2{--vd-hit:vd-hit-wave-2}
+[data-vd-play=true] .wave-3{--vd-hit:vd-hit-wave-3}[data-vd-play=true] .wave-4{--vd-hit:vd-hit-wave-4}
+@keyframes vd-hit-launch{0%,33%,100%{opacity:0}7%,28%{opacity:1}0%{stroke-dashoffset:.1}33%,100%{stroke-dashoffset:-.95}}
+@keyframes vd-hit-travel{0%,29%,65%,100%{opacity:0}34%,57%{opacity:1}0%,29%{stroke-dashoffset:.08}65%,100%{stroke-dashoffset:-.95}}
+@keyframes vd-hit-echo{0%,31%,57%,100%{opacity:0}41%,50%{opacity:1}}
+@keyframes vd-hit-early-plot{0%,29%,100%{opacity:0}39%,89%{opacity:.8}0%,29%{stroke-dashoffset:1}52%,100%{stroke-dashoffset:0}}
+@keyframes vd-hit-middle-plot{0%,46%,100%{opacity:0}56%,93%{opacity:.9}0%,46%{stroke-dashoffset:1}74%,100%{stroke-dashoffset:0}}
+@keyframes vd-hit-result{0%,56%{opacity:0;stroke-dashoffset:1}66%{opacity:1}90%,100%{opacity:1;stroke-dashoffset:0}}
+@keyframes vd-hit-wave-1{0%,28%,62%,100%{opacity:0}39%,53%{opacity:1}}
+@keyframes vd-hit-wave-2{0%,40%,73%,100%{opacity:0}49%,63%{opacity:1}}
+@keyframes vd-hit-wave-3{0%,52%,88%,100%{opacity:0}64%,77%{opacity:1}}
+@keyframes vd-hit-wave-4{0%,62%{opacity:0}77%,100%{opacity:1}}
+@keyframes vd-flow-first{0%,25%,100%{opacity:0}5%,19%{opacity:1}0%{stroke-dashoffset:.13}25%,100%{stroke-dashoffset:-.95}}
+@keyframes vd-flow-middle{0%,14%,41%,100%{opacity:0}19%,35%{opacity:.91}0%,14%{stroke-dashoffset:.1}41%,100%{stroke-dashoffset:-.96}}
+@keyframes vd-flow-late{0%,23%,49%,100%{opacity:0}29%,42%{opacity:1}0%,23%{stroke-dashoffset:.1}49%,100%{stroke-dashoffset:-.95}}
+@keyframes vd-draw-first{0%,11%,55%,100%{opacity:0}17%,48%{opacity:.75}0%,11%{stroke-dashoffset:1}31%,100%{stroke-dashoffset:0}}
+@keyframes vd-draw-middle{0%,23%,64%,100%{opacity:0}28%,57%{opacity:.83}0%,23%{stroke-dashoffset:1}43%,100%{stroke-dashoffset:0}}
+@keyframes vd-draw-end{0%,33%,77%,100%{opacity:0}41%,66%{opacity:1}0%,33%{stroke-dashoffset:1}55%,100%{stroke-dashoffset:0}}
+@keyframes vd-accent-source{0%,27%,100%{opacity:0}7%,18%{opacity:.83}}
+@keyframes vd-accent-echo{0%,16%,44%,100%{opacity:0}24%,35%{opacity:.92}}
+@keyframes vd-wave-1{0%,14%,41%,100%{opacity:0}22%,32%{opacity:.9}}
+@keyframes vd-wave-2{0%,22%,49%,100%{opacity:0}31%,40%{opacity:.87}}
+@keyframes vd-wave-3{0%,30%,57%,100%{opacity:0}38%,47%{opacity:.85}}
+@keyframes vd-wave-4{0%,38%,68%,100%{opacity:0}46%,55%{opacity:.95}}
+@media(max-width:600px){.vd-track{grid-auto-columns:calc(100% - 23px);gap:9px}.vd-heading{left:.72rem;bottom:.56rem}.vd-controls{gap:.25rem}.vd-controls button,.vd-close{font-size:.84rem}.vd-art::after{height:24%}}
+@media(prefers-reduced-motion:reduce){.visual-deck *{scroll-behavior:auto!important}.vd-art .art-fx{animation:none!important}}
