@@ -5,6 +5,7 @@ import json, re, math
 P=Path(__file__).resolve().parent
 def x(t): return escape(str(t or ''),quote=True)
 def pair(ko,en): return '<span class="ko" lang="ko">'+x(ko)+'</span><span class="en" lang="en">'+x(en)+'</span>'
+def diagram(r):return '<img src="'+x(r['image'])+'" loading="lazy" decoding="async" width="560" height="280" alt="'+x(r['altKo'])+'" data-alt-ko="'+x(r['altKo'])+'" data-alt-en="'+x(r['alt'])+'">'
 def tag(t):return '<span class="eyebrow">'+x(t)+'</span>'
 def img(src,description='',cls='',lazy=True):return '<img class="'+x(cls)+'" src="'+x(src)+'" alt="'+x(description)+'" decoding="async" '+('loading="lazy"' if lazy else 'fetchpriority="high"')+'>'
 def button(href,ko,en,cls=''):return '<a class="btn '+x(cls)+'" href="'+x(href)+'">'+pair(ko,en)+'</a>'
@@ -41,7 +42,7 @@ def brand():
 def nav(pg):return ''.join('<a href="'+name+'.html"'+(' aria-current="page"' if pg==name else '')+'>'+pair(ko,en)+'</a>' for name,ko,en in pages)
 def shell(pg,content,kt,et):
  title='NECA Lab. · '+kt+' / '+et
- return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#003987"><meta name="description" content="서울시립대학교 차세대 전자파 회로 및 응용 연구실 | NECA Lab., University of Seoul."><title>{x(title)}</title><link href="assets/site.css?v=1" rel="stylesheet"><script defer src="assets/site.js?v=1"></script></head>
+ return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#003987"><meta name="description" content="서울시립대학교 차세대 전자파 회로 및 응용 연구실 | NECA Lab., University of Seoul."><title>{x(title)}</title><link href="assets/site.css?v=2" rel="stylesheet"><script defer src="assets/site.js?v=2"></script></head>
 <body data-page="{pg}"><a class="skip" href="#main">{pair('본문 바로가기','Skip to content')}</a><header><div class="top"><div class="wrap"><span>{pair('서울시립대학교 · 전자전기컴퓨터공학부','University of Seoul · School of Electrical and Computer Engineering')}</span><span class="preview"><i></i>{pair('디자인 시안','Design preview')}</span></div></div><div class="bar wrap"><a class="brand" href="index.html" aria-label="NECA Lab. Home">{brand()}</a><nav id="navigation" aria-label="메인 메뉴 / Main menu">{nav(pg)}</nav><div class="nav-controls"><button type="button" id="language" hidden><span class="ko" lang="en">EN</span><span class="en" lang="ko">한국어</span></button><button type="button" class="hamb" id="menu-trigger" aria-expanded="false" aria-controls="navigation" aria-label="메뉴 / Menu" hidden><span></span><span></span></button></div></div></header><main id="main">{content}</main><footer><div class="foot-main wrap"><div><div class="foot-logo">NECA <span>Lab.</span></div><p>{pair('차세대 전자파 회로 및 응용 연구실','Next-gen. Electromagnetic Circuits and Application Lab.')}<br>{pair('서울시립대학교 전자전기컴퓨터공학부','School of Electrical and Computer Engineering, University of Seoul')}</p></div><div class="footer-links"><a href="mailto:{piemail}">{piemail}</a><a href="{legacy}/home">{pair('현행 연구실 홈페이지','Current lab website')}</a><a href="https://www.uos.ac.kr/">{pair('서울시립대학교','University of Seoul')}</a></div></div><div class="foot-base wrap"><span>NECA Lab. · University of Seoul</span><span>{pair('검토용 디자인 시안','Website design preview')}</span></div></footer></body></html>'''
 def num(x):return f'{x:.2f}'
 def plot(deg):
@@ -74,31 +75,53 @@ def rig():
  groups=''.join(plot(d) for d in [-25,0,25])
  ctrls=''.join(f'<button class="angle" data-angle="{d}" aria-pressed="{str(d==0).lower()}" type="button">{s}</button>' for d,s in [(-25,'−25°'),(0,'0°'),(25,'+25°')])
  return '<figure class="rig"><div class="rig-head"><span>'+pair('빔 조향 실험','Beam steering study')+'</span><span class="mono">8 × 8&nbsp; / &nbsp;λ/2</span></div><svg class="polar" viewBox="0 0 530 264" aria-label="균일 배열의 정규화 주평면 배열인자 / Normalized principal-plane array factor" role="img">'+groups+'</svg><div class="rig-controls"><span>'+pair('조향각','Steering angle')+'</span><div class="angle-group">'+ctrls+'</div></div><figcaption>'+pair('균일 배열의 정규화 배열인자 · 계산 예시, 측정값 아님','Normalized array factor for a uniform array · calculated, not measured')+'</figcaption></figure>'
-rtKo=['AI 기반 RF 설계','6G·위성 통신','레이더·자율 감지','핵융합·극한환경 RF','바이오·의료 전자파']
-rsKo=['전자기 해석과 인공지능을 결합해 RF 회로의 설계 과정을 최적화하고 학습용 데이터를 구축합니다.','밀리미터파 빔포밍 회로와 모듈로 6G 및 저궤도 위성 통신에 필요한 빔 조향 기술을 연구합니다.','차량용 고해상도 레이더 렌즈와 지하 구조물 탐지를 위한 지표투과레이더 안테나를 연구합니다.','KSTAR 핵융합 플라스마와 같은 극한환경에 고주파 전력을 전달하는 안테나를 연구합니다.','비침습 생체 센싱과 의료·미용 분야의 고주파 안테나 시스템을 연구합니다.']
-nKo=['SK하이닉스 VPP 선정 및 협력','한국연구재단 개인기초연구 핵심연구 선정','SK하이닉스 i-TAP 자문 위촉','스마트전자회로설계 챌린지 금상']
-def r_name(r,i):return pair(transl(r,'title',rtKo[i]),r.get('titleEn') or r['title'])
-def r_sum(r,i):return pair(transl(r,'summary',rsKo[i]),r.get('summaryEn') or r['summary'])
-def n_name(z,i):return pair(z.get('titleKo') or (z['title'] if re.search('[가-힣]',z['title']) else nKo[min(i,3)]), z.get('titleEn') or z['title'])
-def n_sum(z):return pair(z.get('summaryKo') or z['summary'],z.get('summaryEn') or z['summary'])
-def home():
- h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('인공지능을 활용한 RF 회로 설계부터 6G 빔 조향 안테나까지, 전자파를 다루는 회로와 시스템을 연구합니다.','At the University of Seoul, we study RF circuits and systems, from AI-assisted design to beam-steerable antennas for 6G.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+rig()+'</div></section>'
- h+='<section class="section wrap">'+sect('RESEARCH','무엇을 연구하나요?','Research in focus','research.html','다섯 분야 모두 보기','All five areas')+'<div class="research-cards">'
- for i,r in enumerate(research[:3]):
-  h+='<a class="research-card" href="research.html#'+x(r['id'])+'"><div class="photo">'+img(r.get('image'),'',lazy=True)+'</div><h3>'+r_name(r,i)+'</h3><p>'+r_sum(r,i)+'</p></a>'
- h+='</div></section><section class="tint"><div class="section wrap">'+sect('PUBLICATIONS','최근 연구 성과','Recent publications','publications.html','전체 목록 보기','Browse all publications')+'<div class="papers">'+''.join(paper(p,True) for p in [pubs[0],next((z for z in pubs if z['type']=='conference'),pubs[1]),pubs[1]])+'</div></div></section>'
- h+='<section class="section wrap split"><div>'+sect('LAB NOTES','연구실 소식','Lab news','news.html','전체 소식','All news')+'<div class="notes-list">'+''.join('<a href="news.html#'+x(z['id'])+'">'+n_name(z,i)+'</a>' for i,z in enumerate(news[:3]))+'</div></div><div class="join-card">'+tag('PEOPLE')+'<h2>'+pair('사람을 만나다','Meet the team')+'</h2><p>'+pair('RF 회로, 안테나, 인공지능을 연구하는 구성원을 소개합니다.','Meet the researchers working in RF integrated circuits, antennas and AI.')+'</p>'+txtlink('people.html','구성원 소개','Browse people')+'</div></section>'
+def r_name(r):return pair(r['titleKo'],r['title'])
+def r_sum(r):return pair(r['summaryKo'],r['summary'])
+def n_name(z):return pair(z['titleKo'],z['title'])
+def n_sum(z):return pair(z['summaryKo'],z['summary'])
+def recent_outputs(records):
+ """Keep journals with a confirmed review venue and presentations at international conferences in separate lists."""
+ journals=[r for r in records if r.get('type')=='journal' and r.get('peerReviewed') is True]
+ talks=[r for r in records if r.get('type')=='conference' and r.get('international') is True and r.get('presentationDate')]
+ # Source lists are newest first within a year, including year-only journal citations.
+ return sorted(journals,key=lambda r:-r['year'])[:2],sorted(talks,key=lambda r:-r['year'])[:2]
+def home_news():
+ lead,*others=news
+ # Two more highlights from different categories; the complete announcements remain on the News page.
+ highlights=[next((z for z in others if z.get('label')==category),None) for category in ('Research funding','Student award')]
+ h='<section class="bulletin" id="lab-news"><div class="wrap section">'+sect('NEWS','연구실 소식','Lab news','news.html','소식 전체 보기','All lab news')+'<div class="bulletin-layout">'
+ def news_entry(z,featured):
+  k,e={'Industry collaboration':('산학협력','Industry collaboration'),'Research funding':('연구 선정','Research award'),'Student award':('학생 수상','Student award')}.get(z.get('label'),('연구실 소식','Lab news'))
+  return '<article class="bulletin-item'+(' lead' if featured else '')+'"><span class="news-kicker">'+pair(k,e)+'</span><h3><a href="news.html#'+x(z['id'])+'">'+n_name(z)+'</a></h3>'+('<p>'+n_sum(z)+'</p>' if featured else '')+'</article>'
+ h+=news_entry(lead,True)+'<div class="bulletin-more">'+''.join(news_entry(z,False) for z in highlights if z)+'</div></div></div></section>'
  return h
+def home_areas():
+ h='<section class="wrap section focus-section" id="research-areas">'+sect('RESEARCH','연구 분야','Our research','research.html','연구 자세히 보기','Explore our research')+'<div class="focus-grid">'
+ for r in research:
+  h+='<a class="focus-card" href="research.html#'+x(r['id'])+'"><div class="focus-art">'+img(r['image'],'')+'</div><div class="focus-copy"><h3>'+r_name(r)+'</h3><p>'+pair(r['shortKo'],r['short'])+'</p></div></a>'
+ return h+'</div></section>'
+def home_outputs():
+ journals,talks=recent_outputs(pubs)
+ def column(rows,ko,en):
+  return '<div class="output-group"><h3>'+pair(ko,en)+'</h3><ul>'+''.join('<li data-kind="'+x(r['type'])+'"><span class="output-meta"><i lang="en">'+x(r['venue'])+'</i> · '+x(r['year'])+'</span><h4 lang="en"><a href="publications.html#'+x(r['id'])+'">'+x(r['title'])+'</a></h4></li>' for r in rows)+'</ul></div>'
+ return '<section class="tint" id="recent-outputs"><div class="wrap section">'+sect('PUBLICATIONS','최근 연구 성과','Recent research outputs','publications.html','성과 전체 보기','All publications')+'<div class="output-grid">'+column(journals,'저널 논문','Peer-reviewed journals')+column(talks,'국제학회 발표','International conference presentations')+'</div></div></section>'
+def home():
+ h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+rig()+'</div></section>'
+ h+=home_news()+home_areas()+home_outputs()
+ return h+'<section class="section wrap"><div class="team-strip"><div>'+tag('PEOPLE')+'<h2>'+pair('연구실 구성원','Meet the team')+'</h2></div><div><p>'+pair('전자파와 회로를 함께 연구하는 사람들을 소개합니다.','Meet the people studying electromagnetic waves and circuits together.')+'</p>'+txtlink('people.html','구성원 소개','Browse people')+'</div></div></section>'
 def concept():
  orig=(img(logo,'NECA Lab. original mark','logo-example')+'<span>'+pair('기존 로고','Original mark')+'</span>') if logo else ''
  return '<details class="concept"><summary>'+pair('연구실 로고 디자인 제안','Lab identity design study')+'</summary><div class="concept-grid">'+('<div class="mark-tile">'+orig+'</div>' if orig else '')+'<div class="mark-tile">'+img('assets/em-ai-study.svg','Proposed symbol: perpendicular fields and a circuit trace','logo-example')+'<span>'+pair('EM × AI · 제안안','EM × AI · concept only')+'</span></div><p>'+pair('전기장과 자기장의 직교 관계를 두 축으로, 전파 방향을 따라 이어지는 점을 회로·AI 연결선으로 표현했습니다. 기존 로고를 대체하지 않습니다.','Two axes represent orthogonal electric and magnetic fields. A line of circuit nodes suggests propagation and AI connections. This is a separate concept, not a replacement for the original.')+'</p></div></details>'
 def research_page():
- h=pagehead('RESEARCH','연구 분야','Research','AI 기반 설계, 통신, 센싱, 극한환경, 생체 응용으로 이어지는 다섯 연구 분야입니다.','Five areas connect AI-assisted design with communications, sensing, extreme environments and biomedical applications.')
- h+='<div class="wrap section areas"><p class="art-credit">'+pair('각 분야의 이미지는 연구 내용을 설명하는 개념도입니다.','The research images are concept illustrations, not photographs of laboratory hardware.')+'</p>'
- keys=['Lange Coupler','Reflectarray','Ground-Coupled','Helicon','hyperthermia']
- for i,r in enumerate(research):
-  rel=next((p for p in pubs if keys[i].lower() in p['title'].lower()),None)
-  h+='<article class="area" id="'+x(r['id'])+'"><div class="area-image">'+img(r['image'],'')+'</div><div>'+tag(['RF DESIGN','COMMUNICATIONS','SENSING','PLASMA SYSTEMS','BIOMEDICAL'][i])+'<h2>'+r_name(r,i)+'</h2><p>'+r_sum(r,i)+'</p>'+('<div class="related">'+tag('RELATED WORK')+'<a lang="en" href="publications.html#'+x(rel['id'])+'">'+x(rel['title'])+'</a></div>' if rel else '')+'</div></article>'
+ h=pagehead('RESEARCH','연구 분야','Research','다섯 연구 분야에서 우리가 풀고 있는 문제를 소개합니다. 그림은 원리를 설명한 개념도이며 측정 결과가 아닙니다.','Explore the questions behind our five research fields. The diagrams illustrate principles, not measured results.')
+ h+='<div class="wrap section areas"><div role="navigation" class="area-nav" aria-label="연구 분야 바로가기 / Research fields">'
+ for r in research:h+='<a href="#'+x(r['id'])+'">'+r_name(r)+'</a>'
+ h+='</div>'
+ for r in research:
+  h+='<article class="area pillar" id="'+x(r['id'])+'"><figure class="area-figure"><div class="area-image">'+diagram(r)+'</div><figcaption>'+pair(r['captionKo'],r['caption'])+'</figcaption></figure><div><h2>'+r_name(r)+'</h2><p>'+r_sum(r)+'</p>'
+  if r.get('example'):
+   ex=r['example'];h+='<div class="related"><span class="eyebrow">'+pair('공개 연구 사례','Explore an example')+'</span><a href="'+x(ex['href'])+'">'+pair(ex['labelKo'],ex['label'])+'</a></div>'
+  h+='</div></article>'
  return h+concept()+'</div>'
 def people_page():
  h=pagehead('PEOPLE','구성원','People','연구책임자와 대학원 연구원들을 소개합니다.','Meet our principal investigator and graduate researchers.')
@@ -122,7 +145,7 @@ def news_page():
  h=pagehead('NEWS','연구실 소식','Lab news','연구실에서 공개한 연구 협력, 과제 선정, 교육 성과입니다.','Announcements from the lab about research collaborations, projects and student achievements.')
  h+='<div class="wrap section news-list">'
  for i,z in enumerate(news):
-  h+='<article id="'+x(z['id'])+'">'+tag((z.get('label') or z.get('category') or 'LAB NEWS').upper())+'<h2>'+n_name(z,i)+'</h2><p>'+n_sum(z)+'</p></article>'
+  h+='<article id="'+x(z['id'])+'">'+tag((z.get('label') or z.get('category') or 'LAB NEWS').upper())+'<h2>'+n_name(z)+'</h2><p>'+n_sum(z)+'</p></article>'
  return h+'<p class="source-line">'+txtlink(legacy+'/news','현행 연구실 소식','Current lab news page')+'</p></div>'
 def join_page():
  h=pagehead('JOIN','연구실 합류 안내','Join the lab','학부연구생과 대학원 연구에 관심이 있다면 오성욱 교수에게 문의하세요.','Undergraduate and prospective graduate researchers are welcome to contact Prof. Seongwoog Oh.')

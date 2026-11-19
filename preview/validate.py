@@ -34,3 +34,26 @@ for p in d['publications']:
  if p['doi']:assert re.match(r'^10\.\d{4,9}/\S+$',p['doi'])
 print('PASS six noindex pages, 32 distinct records, 7 portraits, logo provenance, '+str(sum(len(x.links) for x in parsed.values()))+' resource/anchor references.')
 
+
+# Guards for the bilingual editorial pages; no third-party modules or network access.
+from xml.etree import ElementTree as ET
+from build import home, research_page, recent_outputs
+fields=d['research']
+assert len(fields)==len({r['id'] for r in fields})==5
+for r in fields:
+ assert r['image'].startswith('assets/field-') and r['image'].endswith('.svg')
+ root=ET.parse(P/r['image']).getroot()
+ assert root.tag=='{http://www.w3.org/2000/svg}svg' and root.attrib.get('viewBox')=='0 0 560 280'
+ assert not root.findall('.//{http://www.w3.org/2000/svg}image') and not root.findall('.//{http://www.w3.org/2000/svg}script')
+ for k in ['summary','summaryKo']:
+  assert 0<len(re.findall(r'[.!?](?:\s|$)',r[k]))<=2,r['id']
+ for k in ['short','shortKo','caption','captionKo','alt','altKo']:assert r[k].strip(),r['id']
+h=home(); order=['class="hero"','id="lab-news"','id="research-areas"','id="recent-outputs"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
+j,c=recent_outputs(d['publications']);assert len(j)==len(c)==2
+assert all(r['type']=='journal' and r['peerReviewed'] is True for r in j)
+assert all(r['type']=='conference' and r['international'] is True and r['presentationDate'] for r in c)
+assert recent_outputs([{'type':'news'},{'type':'journal','peerReviewed':False},{'type':'conference','international':True}])==([],[])
+for r in j+c:assert f'publications.html#{r["id"]}' in h
+for r in fields:
+ assert f'research.html#{r["id"]}' in h and r['altKo'] in research_page()
+print('PASS homepage section order, strict academic output selection, five bilingual areas and five original vector diagrams.')

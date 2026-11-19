@@ -15,7 +15,8 @@
       "doi": "10.1109/access.2026.3747835",
       "url": "https://doi.org/10.1109/access.2026.3747835",
       "source": "https://sites.google.com/view/necalab/Journal",
-      "metadataSource": "https://api.crossref.org/works/10.1109/access.2026.3747835"
+      "metadataSource": "https://api.crossref.org/works/10.1109/access.2026.3747835",
+      "peerReviewed": true
     },
     {
       "id": "journal-2",
@@ -39,7 +40,8 @@
       "source": "https://sites.google.com/view/necalab/Journal",
       "role": "co-corresponding author",
       "month": 6,
-      "metadataSource": "https://api.crossref.org/works/10.3389/fmedt.2026.1768771"
+      "metadataSource": "https://api.crossref.org/works/10.3389/fmedt.2026.1768771",
+      "peerReviewed": true
     },
     {
       "id": "journal-3",
@@ -58,7 +60,8 @@
       "source": "https://sites.google.com/view/necalab/Journal",
       "role": "co-first author",
       "month": 3,
-      "metadataSource": "https://api.crossref.org/works/10.1109/access.2026.3671652"
+      "metadataSource": "https://api.crossref.org/works/10.1109/access.2026.3671652",
+      "peerReviewed": true
     },
     {
       "id": "journal-4",
@@ -77,7 +80,8 @@
       "source": "https://sites.google.com/view/necalab/Journal",
       "role": "co-first author",
       "month": 3,
-      "metadataSource": "https://api.crossref.org/works/10.1109/tap.2025.3639500"
+      "metadataSource": "https://api.crossref.org/works/10.1109/tap.2025.3639500",
+      "peerReviewed": true
     },
     {
       "id": "journal-5",
@@ -94,7 +98,8 @@
       "doi": "10.26866/jees.2026.1.r.342",
       "url": "https://doi.org/10.26866/jees.2026.1.r.342",
       "source": "https://sites.google.com/view/necalab/Journal",
-      "month": 1
+      "month": 1,
+      "peerReviewed": true
     },
     {
       "id": "journal-6",
@@ -116,7 +121,8 @@
       "url": "https://doi.org/10.1109/TMTT.2025.3625852",
       "source": "https://sites.google.com/view/necalab/Journal",
       "role": "co-first author",
-      "month": 1
+      "month": 1,
+      "peerReviewed": true
     },
     {
       "id": "journal-7",
@@ -136,7 +142,8 @@
       "source": "https://sites.google.com/view/necalab/Journal",
       "role": "co-corresponding author",
       "month": 12,
-      "metadataSource": "https://api.crossref.org/works/10.1109/ojap.2025.3606889"
+      "metadataSource": "https://api.crossref.org/works/10.1109/ojap.2025.3606889",
+      "peerReviewed": true
     },
     {
       "id": "journal-8",
@@ -156,7 +163,8 @@
       "url": "https://doi.org/10.1109/ACCESS.2025.3581322",
       "source": "https://sites.google.com/view/necalab/Journal",
       "role": "co-corresponding author",
-      "month": 6
+      "month": 6,
+      "peerReviewed": true
     },
     {
       "id": "journal-9",
@@ -177,7 +185,8 @@
       "url": "https://doi.org/10.1109/TAP.2024.3510861",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 2,
-      "metadataSource": "https://pure.uos.ac.kr/en/publications/pre-phased-1-bit-reflective-passive-metasurface-with-optimum-numbe/"
+      "metadataSource": "https://pure.uos.ac.kr/en/publications/pre-phased-1-bit-reflective-passive-metasurface-with-optimum-numbe/",
+      "peerReviewed": true
     },
     {
       "id": "journal-10",
@@ -194,7 +203,8 @@
       "url": "https://doi.org/10.1109/LMWT.2023.3348162",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 3,
-      "metadataSource": "https://ieeexplore.ieee.org/document/10418909"
+      "metadataSource": "https://ieeexplore.ieee.org/document/10418909",
+      "peerReviewed": true
     },
     {
       "id": "journal-11",
@@ -211,7 +221,8 @@
       "url": "https://doi.org/10.1109/ACCESS.2023.3334433",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 11,
-      "metadataSource": "https://ieeexplore.ieee.org/document/10322861"
+      "metadataSource": "https://ieeexplore.ieee.org/document/10322861",
+      "peerReviewed": true
     },
     {
       "id": "journal-12",
@@ -228,7 +239,8 @@
       "url": "https://doi.org/10.1109/TMTT.2023.3263590",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 10,
-      "metadataSource": "https://pure.uos.ac.kr/en/publications/miniaturized-mmwave-tri-band-vco-using-self-and-mutual-mode-contr/"
+      "metadataSource": "https://pure.uos.ac.kr/en/publications/miniaturized-mmwave-tri-band-vco-using-self-and-mutual-mode-contr/",
+      "peerReviewed": true
     },
     {
       "id": "journal-13",
@@ -249,7 +261,8 @@
       "url": "https://doi.org/10.1109/TAP.2023.3283136",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 8,
-      "metadataSource": "https://ieeexplore.ieee.org/document/10147799"
+      "metadataSource": "https://ieeexplore.ieee.org/document/10147799",
+      "peerReviewed": true
     },
     {
       "id": "journal-14",
@@ -266,7 +279,8 @@
       "doi": null,
       "url": "https://ieeexplore.ieee.org/document/10121032",
       "source": "https://sites.google.com/view/necalab/Journal",
-      "month": 7
+      "month": 7,
+      "peerReviewed": true
     },
     {
       "id": "journal-15",
@@ -284,7 +298,8 @@
       "url": "https://doi.org/10.1109/TMTT.2023.3253545",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 5,
-      "metadataSource": "https://ieeexplore.ieee.org/document/10078021"
+      "metadataSource": "https://ieeexplore.ieee.org/document/10078021",
+      "peerReviewed": true
     },
     {
       "id": "journal-16",
@@ -305,7 +320,8 @@
       "url": "https://doi.org/10.1109/TBCAS.2023.3255248",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 4,
-      "metadataSource": "https://ieeexplore.ieee.org/document/10066210"
+      "metadataSource": "https://ieeexplore.ieee.org/document/10066210",
+      "peerReviewed": true
     },
     {
       "id": "journal-17",
@@ -325,7 +341,8 @@
       "url": "https://doi.org/10.1109/LAWP.2022.3186686",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 10,
-      "metadataSource": "https://ieeexplore.ieee.org/document/9808385"
+      "metadataSource": "https://ieeexplore.ieee.org/document/9808385",
+      "peerReviewed": true
     },
     {
       "id": "journal-18",
@@ -346,7 +363,8 @@
       "url": "https://doi.org/10.1109/tmtt.2021.3075726",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 9,
-      "metadataSource": "https://api.crossref.org/works/10.1109/tmtt.2021.3075726"
+      "metadataSource": "https://api.crossref.org/works/10.1109/tmtt.2021.3075726",
+      "peerReviewed": true
     },
     {
       "id": "journal-19",
@@ -364,7 +382,8 @@
       "url": "https://doi.org/10.1109/LMWC.2020.3045192",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 2,
-      "metadataSource": "https://ieeexplore.ieee.org/document/9311180"
+      "metadataSource": "https://ieeexplore.ieee.org/document/9311180",
+      "peerReviewed": true
     },
     {
       "id": "journal-20",
@@ -381,7 +400,8 @@
       "url": "https://doi.org/10.3390/s20247334",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 12,
-      "metadataSource": "https://www.mdpi.com/1424-8220/20/24/7334"
+      "metadataSource": "https://www.mdpi.com/1424-8220/20/24/7334",
+      "peerReviewed": true
     },
     {
       "id": "journal-21",
@@ -399,7 +419,8 @@
       "url": "https://doi.org/10.3390/s19183982",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 9,
-      "metadataSource": "https://api.crossref.org/works/10.3390/s19183982"
+      "metadataSource": "https://api.crossref.org/works/10.3390/s19183982",
+      "peerReviewed": true
     },
     {
       "id": "journal-22",
@@ -419,7 +440,8 @@
       "url": "https://doi.org/10.1049/el.2017.3827",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 2,
-      "metadataSource": "https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/el.2017.3827"
+      "metadataSource": "https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/el.2017.3827",
+      "peerReviewed": true
     },
     {
       "id": "journal-23",
@@ -440,7 +462,8 @@
       "url": "https://doi.org/10.26866/jees.2018.18.1.70",
       "source": "https://sites.google.com/view/necalab/Journal",
       "month": 1,
-      "metadataSource": "https://api.crossref.org/works/10.26866/jees.2018.18.1.70"
+      "metadataSource": "https://api.crossref.org/works/10.26866/jees.2018.18.1.70",
+      "peerReviewed": true
     },
     {
       "id": "conference-1",
@@ -692,54 +715,94 @@
   ],
   "research": [
     {
-      "id": "physical-ai",
-      "title": "Physical AI & RF Design",
-      "titleKo": "피지컬 AI · RF 설계",
-      "summary": "We apply machine learning to electromagnetic simulation and RF design, with an emphasis on efficient design exploration and dependable training data.",
-      "summaryKo": "전자기 시뮬레이션과 RF 회로 설계에 AI를 적용하여 설계 탐색을 효율화하고 신뢰도 높은 학습 데이터를 구축합니다.",
-      "image": "assets/research-physical-ai.jpg",
-      "source": "https://sites.google.com/view/necalab/home",
-      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field1.png"
-    },
-    {
-      "id": "satellite",
-      "title": "6G & Satellite Communications",
-      "titleKo": "6G · 위성통신",
-      "summary": "Our work spans millimeter-wave beamforming ICs, antennas, and modules for next-generation wireless and low-Earth-orbit satellite links.",
-      "summaryKo": "차세대 무선과 저궤도 위성 링크를 위한 밀리미터파 빔포밍 IC, 안테나 및 모듈을 연구합니다.",
-      "image": "assets/research-satellite.jpg",
-      "source": "https://sites.google.com/view/necalab/home",
-      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field2.png"
-    },
-    {
       "id": "radar",
-      "title": "Radar & Autonomous Sensing",
-      "titleKo": "레이더 · 자율주행 센싱",
-      "summary": "We study radar front ends and antenna lenses for autonomous sensing, alongside ground-penetrating antennas for subsurface inspection.",
-      "summaryKo": "자율주행 센싱용 레이더 프런트엔드와 안테나 렌즈, 지하 공간 탐사를 위한 지표투과 안테나를 연구합니다.",
-      "image": "assets/research-radar.jpg",
-      "source": "https://sites.google.com/view/necalab/home",
-      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field3.png"
+      "titleKo": "레이더와 피지컬 AI",
+      "title": "Radar & Physical AI",
+      "shortKo": "전파로 땅속을 보고 이동체의 주변을 읽습니다.",
+      "short": "Using radio waves to sense underground and around moving vehicles.",
+      "summaryKo": "되돌아온 전파로 장애물이나 땅속 구조물을 감지합니다. 이동체가 센싱·통신 정보를 바탕으로 다음 행동을 정하는 방법도 연구합니다.",
+      "summary": "We use radio echoes to detect obstacles and structures below ground. We also study how mobile systems use sensing and communications to choose their next move.",
+      "image": "assets/field-radar.svg",
+      "captionKo": "지표투과레이더의 송신파와 매설물에서 돌아온 반사파",
+      "caption": "Ground-penetrating radar: transmitted pulse and buried-object echo",
+      "altKo": "이동형 레이더가 땅속 물체에 보낸 전파와 돌아온 반사파가 시간축에서 나뉘어 있습니다.",
+      "alt": "A mobile radar sends a pulse toward a buried object. A trace shows the time between transmission and the returning echo.",
+      "example": {
+        "href": "publications.html#conference-1",
+        "labelKo": "지표투과레이더용 광대역 안테나",
+        "label": "A wideband antenna for ground-penetrating radar"
+      }
     },
     {
-      "id": "fusion",
-      "title": "Nuclear Fusion & Extreme RF",
-      "titleKo": "핵융합 · 극한환경 RF",
-      "summary": "We explore high-power RF and antennas for demanding environments, including plasma heating and current drive for fusion research.",
-      "summaryKo": "핵융합 플라즈마 가열과 전류 구동 등 극한 환경을 위한 고출력 RF 및 안테나 기술을 연구합니다.",
-      "image": "assets/research-fusion.jpg",
-      "source": "https://sites.google.com/view/necalab/home",
-      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field4.png"
+      "id": "rf-design",
+      "titleKo": "AI 기반 RF 설계",
+      "title": "AI for RF Design",
+      "shortKo": "원하는 신호 응답에서 회로 모양을 거꾸로 찾습니다.",
+      "short": "Finding circuit shapes that produce a target frequency response.",
+      "summaryKo": "원하는 주파수 응답을 정하고 AI로 수동 회로의 모양을 찾습니다. 전자파 시뮬레이션으로 후보를 비교하면서 설계에 필요한 계산을 줄이는 방법을 연구합니다.",
+      "summary": "We start with a target frequency response and use AI to propose a passive circuit layout. We compare designs in electromagnetic simulations to make better use of computing time.",
+      "image": "assets/field-rf-design.svg",
+      "captionKo": "목표 응답과 계산한 응답을 비교하는 회로 설계 과정",
+      "caption": "Circuit design loop: compare the target and simulated responses",
+      "altKo": "점선 목표 응답과 실선 시뮬레이션 응답을 비교하고 AI가 다음 회로 모양을 제안합니다.",
+      "alt": "Dashed and solid curves compare a target and a simulated frequency response. AI proposes a circuit layout for another check.",
+      "example": {
+        "href": "publications.html#conference-2",
+        "labelKo": "39 GHz 결합기의 AI 역설계",
+        "label": "AI-assisted inverse design of a 39 GHz coupler"
+      }
     },
     {
-      "id": "biomed",
-      "title": "Biomedical Electromagnetics",
-      "titleKo": "바이오메디컬 전자파",
-      "summary": "We investigate noninvasive sensing and the use of RF and microwave devices in biomedical research.",
-      "summaryKo": "비침습 바이오 센싱과 바이오메디컬 연구를 위한 RF·마이크로파 소자를 연구합니다.",
-      "image": "assets/research-biomed.jpg",
-      "source": "https://sites.google.com/view/necalab/home",
-      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field5.png"
+      "id": "interconnects",
+      "titleKo": "3차원 반도체 연결",
+      "title": "3D Chip Interconnects",
+      "shortKo": "겹겹이 쌓은 칩 사이에서 신호가 어떻게 흐를까요?",
+      "short": "How do high-speed signals travel between stacked chips?",
+      "summaryKo": "적층 칩의 층과 층을 잇는 미세한 수직 배선(TSV)에 고주파 신호를 보냅니다. 측정 결과를 바탕으로 이웃 배선의 영향까지 설명하는 회로 모델을 만듭니다.",
+      "summary": "Tiny vertical wires called through-silicon vias (TSVs) carry signals between stacked chips. We measure how high-frequency signals travel through them and model how nearby wires affect one another.",
+      "image": "assets/field-interconnects.svg",
+      "captionKo": "인접 수직 배선의 신호(A)와 결합에 따른 간섭(B)",
+      "caption": "Adjacent vertical connections: driven signal (A) and coupled disturbance (B)",
+      "altKo": "세 층의 칩을 잇는 두 수직 배선 옆에, 한 배선의 신호 변화가 이웃 배선에 작은 파형을 만드는 모습이 보입니다.",
+      "alt": "Two vertical lines run through three chip layers. A voltage step on line A causes a smaller transient on its neighbour B.",
+      "example": {
+        "href": "news.html#sk-hynix-vpp",
+        "labelKo": "적층 배선의 고주파 측정",
+        "label": "Measuring stacked interconnects at radio frequencies"
+      }
+    },
+    {
+      "id": "plasma",
+      "titleKo": "핵융합 플라스마 RF",
+      "title": "RF for Fusion Plasmas",
+      "shortKo": "고출력 전파를 플라스마 안으로 전달합니다.",
+      "short": "Launching high-power radio waves into a fusion plasma.",
+      "summaryKo": "핵융합 실험 장치의 플라스마에 고출력 전파를 보내는 안테나를 연구합니다. 안테나 모양이 플라스마로 전달되는 에너지에 어떤 영향을 주는지 살핍니다.",
+      "summary": "We study antennas that launch high-power radio waves into fusion plasmas. We investigate how the antenna’s shape affects the energy transferred to the plasma.",
+      "image": "assets/field-plasma.svg",
+      "captionKo": "고주파 전원에서 안테나를 거쳐 플라스마로 전달되는 전력",
+      "caption": "RF power travels from the source through a launcher into the plasma",
+      "altKo": "오른쪽의 고주파 전원이 안테나에 연결되며, 안테나가 고리 모양 플라스마의 가장자리로 파동을 보냅니다.",
+      "alt": "An RF source feeds a launcher that sends waves into the edge of a toroidal plasma.",
+      "example": {
+        "href": "publications.html#conference-3",
+        "labelKo": "플라스마 전류 구동용 진행파 안테나",
+        "label": "A traveling-wave antenna for plasma current drive"
+      }
+    },
+    {
+      "id": "grounded-ai",
+      "titleKo": "근거 기반 AI",
+      "title": "Evidence-Grounded AI",
+      "shortKo": "AI 답변을 뒷받침하는 문서 속 근거를 찾습니다.",
+      "short": "Connecting an AI answer to the passage that supports it.",
+      "summaryKo": "질문에 맞는 분야별 규정과 지침을 문서에서 찾는 AI를 연구합니다. 답변과 함께 근거 문장을 보여줘 사용자가 직접 확인할 수 있게 합니다.",
+      "summary": "We study how AI can find the rules and guidance relevant to a question. Showing the supporting passage alongside the answer lets people check it for themselves.",
+      "image": "assets/field-grounded-ai.svg",
+      "captionKo": "질문에서 관련 문서로, 근거 문장에서 답변으로",
+      "caption": "From a question to the relevant document and a source-backed answer",
+      "altKo": "입력된 질문에서 문서를 찾아 한 구절을 강조하고, 그 구절을 답변 옆에 다시 표시합니다.",
+      "alt": "A passage in a reference document is highlighted and shown alongside the answer."
     }
   ],
   "news": [
