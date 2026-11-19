@@ -1,0 +1,783 @@
+{
+  "publications": [
+    {
+      "id": "journal-1",
+      "type": "journal",
+      "title": "Design and Demonstration of Electronically Reconfigurable and Profile-Adjustable Liquid Crystal-Based Folded Reflectarray With 2-D Beam Scanning",
+      "authors": [
+        "Hogyeom Kim",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2026,
+      "venue": "IEEE Access",
+      "citation": "IEEE Access, vol. 14, pp. 169048-169058, 2026",
+      "doi": "10.1109/access.2026.3747835",
+      "url": "https://doi.org/10.1109/access.2026.3747835",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "metadataSource": "https://api.crossref.org/works/10.1109/access.2026.3747835"
+    },
+    {
+      "id": "journal-2",
+      "type": "journal",
+      "title": "A stacked cavity-backed metamaterial antenna for confined hyperthermia of subcutaneous fat in ISM band",
+      "authors": [
+        "Lee D.-M.",
+        "Jung Y.-J.",
+        "Kim I.",
+        "Cho K.",
+        "Wang Q.",
+        "Oh S.",
+        "Kim E.-S.",
+        "Kim N.-Y."
+      ],
+      "year": 2026,
+      "venue": "Frontiers in Medical Technology",
+      "citation": "Frontiers in Medical Technology, 8, art. no. 1768771, Jun. 2026",
+      "doi": "10.3389/fmedt.2026.1768771",
+      "url": "https://doi.org/10.3389/fmedt.2026.1768771",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "role": "co-corresponding author",
+      "month": 6,
+      "metadataSource": "https://api.crossref.org/works/10.3389/fmedt.2026.1768771"
+    },
+    {
+      "id": "journal-3",
+      "type": "journal",
+      "title": "A Concurrent dual band Power Amplifier with diplexer based on Asymmetric Load Coupler",
+      "authors": [
+        "Jinhyun Kim",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2026,
+      "venue": "IEEE Access",
+      "citation": "IEEE Access, vol. 14, pp. 39821-39829, Mar. 2026",
+      "doi": "10.1109/access.2026.3671652",
+      "url": "https://doi.org/10.1109/access.2026.3671652",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "role": "co-first author",
+      "month": 3,
+      "metadataSource": "https://api.crossref.org/works/10.1109/access.2026.3671652"
+    },
+    {
+      "id": "journal-4",
+      "type": "journal",
+      "title": "A 2.5-Bit Polarization-Rotating Ultrawideband Transmit Array for 6G Communications",
+      "authors": [
+        "Jinhyun Kim",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2026,
+      "venue": "IEEE Transactions on Antennas and Propagation",
+      "citation": "IEEE Transactions on Antennas and Propagation, vol. 74, no. 3, pp. 2869–2874, Mar. 2026",
+      "doi": "10.1109/tap.2025.3639500",
+      "url": "https://doi.org/10.1109/tap.2025.3639500",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "role": "co-first author",
+      "month": 3,
+      "metadataSource": "https://api.crossref.org/works/10.1109/tap.2025.3639500"
+    },
+    {
+      "id": "journal-5",
+      "type": "journal",
+      "title": "Sub-THz Polarization-Dependent Beam-Steerable Metasurface Antenna-in-Package for 6G Communication Constructed Using an LTCC Process",
+      "authors": [
+        "Seongwoog Oh",
+        "Yeongmyeong Park",
+        "Jungsuek Oh"
+      ],
+      "year": 2026,
+      "venue": "Journal of Electromagnetic Engineering and Science",
+      "citation": "Journal of Electromagnetic Engineering and Science, vol. 26, no. 1, pp. 88 - 102, Jan. 2026",
+      "doi": "10.26866/jees.2026.1.r.342",
+      "url": "https://doi.org/10.26866/jees.2026.1.r.342",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 1
+    },
+    {
+      "id": "journal-6",
+      "type": "journal",
+      "title": "Low-Power Consumption and Beam-Sustainable Reconfigurable Intelligent Surface for Fixed Wireless Communication at Millimeter-Wave 5G Band",
+      "authors": [
+        "Hogyeom Kim",
+        "Seongwoog Oh",
+        "Manseok Kim",
+        "Byeongju Moon",
+        "Jeongtaek Oh",
+        "Seungwoo Bang",
+        "Jungsuek Oh"
+      ],
+      "year": 2026,
+      "venue": "IEEE Transactions on Microwave Theory and Techniques",
+      "citation": "IEEE Transactions on Microwave Theory and Techniques, vol. 74, no. 1, pp. 524 - 535, Jan. 2026",
+      "doi": "10.1109/TMTT.2025.3625852",
+      "url": "https://doi.org/10.1109/TMTT.2025.3625852",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "role": "co-first author",
+      "month": 1
+    },
+    {
+      "id": "journal-7",
+      "type": "journal",
+      "title": "Design and Experimental Validation of a Through-Quartz Via-Based LC RIS for Dual-Polarization Beam Steering in Sub-Terahertz Bands",
+      "authors": [
+        "Byeongju Moon",
+        "Seungwoo Bang",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2025,
+      "venue": "IEEE Open Journal of Antennas and Propagation",
+      "citation": "IEEE Open Journal of Antennas and Propagation, vol. 6,no. 6, pp. 1881-1894, Dec. 2025",
+      "doi": "10.1109/ojap.2025.3606889",
+      "url": "https://doi.org/10.1109/ojap.2025.3606889",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "role": "co-corresponding author",
+      "month": 12,
+      "metadataSource": "https://api.crossref.org/works/10.1109/ojap.2025.3606889"
+    },
+    {
+      "id": "journal-8",
+      "type": "journal",
+      "title": "PCB-Based Dual-Polarized Liquid Crystal Reflectarray With High Aperture Efficiency and Bridge-Shaped Biasing Topology for 2D Scanning",
+      "authors": [
+        "Hogyeom Kim",
+        "Byeongju Moon",
+        "Seungwoo Bang",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2025,
+      "venue": "IEEE Access",
+      "citation": "IEEE Access, vol. 13, pp. 116407-116418, Jun. 2025",
+      "doi": "10.1109/ACCESS.2025.3581322",
+      "url": "https://doi.org/10.1109/ACCESS.2025.3581322",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "role": "co-corresponding author",
+      "month": 6
+    },
+    {
+      "id": "journal-9",
+      "type": "journal",
+      "title": "Pre-phased 1-bit Reflective Passive Metasurface with Optimum Number of Pre-phasing for Low QLL and SLL at 140 GHz",
+      "authors": [
+        "Taeyoung Kim",
+        "Sangmin Lee",
+        "Seongwoog Oh",
+        "Jinhyun Kim",
+        "Jungsuek Oh",
+        "Sangjo Choi"
+      ],
+      "year": 2025,
+      "venue": "IEEE Transactions on Antennas and Propagation",
+      "citation": "IEEE Transactions on Antennas and Propagation, vol. 73, no. 2, pp. 975-985, Feb. 2025",
+      "doi": "10.1109/TAP.2024.3510861",
+      "url": "https://doi.org/10.1109/TAP.2024.3510861",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 2,
+      "metadataSource": "https://pure.uos.ac.kr/en/publications/pre-phased-1-bit-reflective-passive-metasurface-with-optimum-numbe/"
+    },
+    {
+      "id": "journal-10",
+      "type": "journal",
+      "title": "Asymmetric Capacitor-Loaded Marchand Balun-Based Four-Stacked Power Amplifier Utilized C-Band Stimulus Source in SOI CMOS",
+      "authors": [
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2024,
+      "venue": "IEEE Microwave and Wireless Technology Letters",
+      "citation": "IEEE Microwave and Wireless Technology Letters, vol. 34, no. 3, pp. 302-305, Mar. 2024",
+      "doi": "10.1109/LMWT.2023.3348162",
+      "url": "https://doi.org/10.1109/LMWT.2023.3348162",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 3,
+      "metadataSource": "https://ieeexplore.ieee.org/document/10418909"
+    },
+    {
+      "id": "journal-11",
+      "type": "journal",
+      "title": "140-GHz Affordable Miniaturized Array Antenna-on-Package for Sub-THz Transceiver",
+      "authors": [
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2023,
+      "venue": "IEEE Access",
+      "citation": "IEEE Access, vol. 11, pp. 132780-132791, Nov. 2023",
+      "doi": "10.1109/ACCESS.2023.3334433",
+      "url": "https://doi.org/10.1109/ACCESS.2023.3334433",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 11,
+      "metadataSource": "https://ieeexplore.ieee.org/document/10322861"
+    },
+    {
+      "id": "journal-12",
+      "type": "journal",
+      "title": "Miniaturized mmWave Tri-Band VCO Using Self- and Mutual-Mode-Controlled Inductor",
+      "authors": [
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2023,
+      "venue": "IEEE Transactions on Microwave Theory and Techniques",
+      "citation": "IEEE Transactions on Microwave Theory and Techniques, vol. 71, no. 10, pp. 4404-4415, Oct. 2023",
+      "doi": "10.1109/TMTT.2023.3263590",
+      "url": "https://doi.org/10.1109/TMTT.2023.3263590",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 10,
+      "metadataSource": "https://pure.uos.ac.kr/en/publications/miniaturized-mmwave-tri-band-vco-using-self-and-mutual-mode-contr/"
+    },
+    {
+      "id": "journal-13",
+      "type": "journal",
+      "title": "Independently Polarization Manipulable Liquid-Crystal-Based Reflective Metasurface for 5G Reflectarray and Reconfigurable Intelligent Surface",
+      "authors": [
+        "Hogyeom Kim",
+        "Seongwoog Oh",
+        "Seungwoo Bang",
+        "Hyunjun Yang",
+        "Byeongjin Kim",
+        "Jungsuek Oh"
+      ],
+      "year": 2023,
+      "venue": "IEEE Transactions on Antennas and Propagation",
+      "citation": "IEEE Transactions on Antennas and Propagation, vol. 71, no. 8, pp. 6606-6616, Aug. 2023",
+      "doi": "10.1109/TAP.2023.3283136",
+      "url": "https://doi.org/10.1109/TAP.2023.3283136",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 8,
+      "metadataSource": "https://ieeexplore.ieee.org/document/10147799"
+    },
+    {
+      "id": "journal-14",
+      "type": "journal",
+      "title": "A Low Phase Error Vector Modulator Using Tunable I/Q Generator for mmWave Communication",
+      "authors": [
+        "Jinhyun Kim",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2023,
+      "venue": "IEEE Microwave and Wireless Technology Letters",
+      "citation": "IEEE Microwave and Wireless Technology Letters, vol. 33, no. 7, pp. 1055-1058, Jul. 2023",
+      "doi": null,
+      "url": "https://ieeexplore.ieee.org/document/10121032",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 7
+    },
+    {
+      "id": "journal-15",
+      "type": "journal",
+      "title": "W-Band Switch-Less Reconfigurable-Push Dual-Band VCO Using Clover-Shaped Inductor and Robust Triple Cores for 6G Communications",
+      "authors": [
+        "Seongwoog Oh",
+        "Jinhyun Kim",
+        "Jungsuek Oh"
+      ],
+      "year": 2023,
+      "venue": "IEEE Transactions on Microwave Theory and Techniques",
+      "citation": "IEEE Transactions on Microwave Theory and Techniques, vol. 71, no. 5, pp. 1890-1898, May 2023",
+      "doi": "10.1109/TMTT.2023.3253545",
+      "url": "https://doi.org/10.1109/TMTT.2023.3253545",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 5,
+      "metadataSource": "https://ieeexplore.ieee.org/document/10078021"
+    },
+    {
+      "id": "journal-16",
+      "type": "journal",
+      "title": "Cage-Embedded Crown-type Dual Coil Wireless Power Transfer Based Microwave Brain Stimulation System for Untethered and Moving Mice",
+      "authors": [
+        "Jinhyun Kim",
+        "Sanggeon Park",
+        "Seongwoog Oh",
+        "Yeowool Huh",
+        "Jeiwon Cho",
+        "Jungsuek Oh"
+      ],
+      "year": 2023,
+      "venue": "IEEE Transactions on Biomedical Circuits and Systems",
+      "citation": "IEEE Transactions on Biomedical Circuits and Systems, vol. 17, no. 2, pp. 362-374, Apr. 2023",
+      "doi": "10.1109/TBCAS.2023.3255248",
+      "url": "https://doi.org/10.1109/TBCAS.2023.3255248",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 4,
+      "metadataSource": "https://ieeexplore.ieee.org/document/10066210"
+    },
+    {
+      "id": "journal-17",
+      "type": "journal",
+      "title": "Ultrathin High-Gain D-Band Transmitarray Based on a Spatial Filter Topology Utilizing Bonding Layer Effect",
+      "authors": [
+        "Dongyeon Seo",
+        "Hogyeom Kim",
+        "Seongwoog Oh",
+        "Jinhyun Kim",
+        "Jungsuek Oh"
+      ],
+      "year": 2022,
+      "venue": "IEEE Antennas and Wireless Propagation Letters",
+      "citation": "IEEE Antennas and Wireless Propagation Letters, vol. 21, no. 10, pp. 1945-1949, Oct. 2022",
+      "doi": "10.1109/LAWP.2022.3186686",
+      "url": "https://doi.org/10.1109/LAWP.2022.3186686",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 10,
+      "metadataSource": "https://ieeexplore.ieee.org/document/9808385"
+    },
+    {
+      "id": "journal-18",
+      "type": "journal",
+      "title": "6.5-GHz Brain Stimulation System Using Enhanced Probe Focusing and Switch-Driven Modulation",
+      "authors": [
+        "Seongwoog Oh",
+        "Dahee Jung",
+        "Taeyoon Seo",
+        "Yeowool Huh",
+        "Jeiwon Cho",
+        "Jungsuek Oh"
+      ],
+      "year": 2021,
+      "venue": "IEEE Transactions on Microwave Theory and Techniques",
+      "citation": "IEEE Transactions on Microwave Theory and Techniques, vol. 69, no. 9, pp. 4107-4117, Sep. 2021",
+      "doi": "10.1109/tmtt.2021.3075726",
+      "url": "https://doi.org/10.1109/tmtt.2021.3075726",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 9,
+      "metadataSource": "https://api.crossref.org/works/10.1109/tmtt.2021.3075726"
+    },
+    {
+      "id": "journal-19",
+      "type": "journal",
+      "title": "Low Phase Noise Concurrent Dual-Band (5/7 GHz) CMOS VCO Using Gate Feedback on Nonuniformly Wound Transformer",
+      "authors": [
+        "Seongwoog Oh",
+        "Kwang-Seok Seo",
+        "Jungsuek Oh"
+      ],
+      "year": 2021,
+      "venue": "IEEE Microwave and Wireless Components Letters",
+      "citation": "IEEE Microwave and Wireless Components Letters, vol. 31, no. 2, pp. 177-180, Feb. 2021",
+      "doi": "10.1109/LMWC.2020.3045192",
+      "url": "https://doi.org/10.1109/LMWC.2020.3045192",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 2,
+      "metadataSource": "https://ieeexplore.ieee.org/document/9311180"
+    },
+    {
+      "id": "journal-20",
+      "type": "journal",
+      "title": "Novel Heat-Mitigating Chip-on-Probe for Brain Stimulation Behavior Experiments",
+      "authors": [
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2020,
+      "venue": "Sensors",
+      "citation": "Sensors, vol. 20, pp. 7334, Dec. 2020",
+      "doi": "10.3390/s20247334",
+      "url": "https://doi.org/10.3390/s20247334",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 12,
+      "metadataSource": "https://www.mdpi.com/1424-8220/20/24/7334"
+    },
+    {
+      "id": "journal-21",
+      "type": "journal",
+      "title": "Affordable Thin Lens Using Single Polarized Disparate Filter Arrays for Beyond 5G toward 6G",
+      "authors": [
+        "Inseop Yoon",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2019,
+      "venue": "Sensors",
+      "citation": "Sensors, vol. 19, no. 18, pp. 3982, Sep. 2019",
+      "doi": "10.3390/s19183982",
+      "url": "https://doi.org/10.3390/s19183982",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 9,
+      "metadataSource": "https://api.crossref.org/works/10.3390/s19183982"
+    },
+    {
+      "id": "journal-22",
+      "type": "journal",
+      "title": "Dual‑purpose probe applicable to permittivity measurements and ablation of biological materials",
+      "authors": [
+        "Taeyoon Seo",
+        "Seongwoog Oh",
+        "Yeowool Huh",
+        "Jeiwon Cho",
+        "Youngwoo Kwon"
+      ],
+      "year": 2018,
+      "venue": "Electronics Letters",
+      "citation": "Electronics Letters, vol. 54, no. 3, pp. 126-128, Feb. 2018",
+      "doi": "10.1049/el.2017.3827",
+      "url": "https://doi.org/10.1049/el.2017.3827",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 2,
+      "metadataSource": "https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/el.2017.3827"
+    },
+    {
+      "id": "journal-23",
+      "type": "journal",
+      "title": "Noninvasive brain stimulation using a modulated microwave signal",
+      "authors": [
+        "Taeyoon Seo",
+        "Seongwoog Oh",
+        "Dahee Jung",
+        "Yeowool Huh",
+        "Jeiwon Cho",
+        "Youngwoo Kwon"
+      ],
+      "year": 2018,
+      "venue": "Journal of Electromagnetic Engineering and Science",
+      "citation": "Journal of Electromagnetic Engineering and Science, vol. 18, no. 1, pp. 70-72, Jan. 2018",
+      "doi": "10.26866/jees.2018.18.1.70",
+      "url": "https://doi.org/10.26866/jees.2018.18.1.70",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 1,
+      "metadataSource": "https://api.crossref.org/works/10.26866/jees.2018.18.1.70"
+    },
+    {
+      "id": "conference-1",
+      "type": "conference",
+      "title": "Wideband Planar Monocone Array Antenna for High-Isolation Ground-Coupled GPR Systems",
+      "authors": [
+        "Dongok Yu",
+        "Sangwook Kim",
+        "Jongsung Choi",
+        "Seongwoog Oh"
+      ],
+      "year": 2026,
+      "venue": "Asia-Pacific Microwave Conference (APMC)",
+      "citation": "Asia-Pacific Microwave Conference (APMC), Fukuoka, Japan, 2026. Conference dates: November 8–11, 2026. Presentation: November 11, 2026",
+      "doi": null,
+      "url": null,
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "conferenceDates": "November 8–11, 2026",
+      "presentationDate": "November 11, 2026",
+      "international": true
+    },
+    {
+      "id": "conference-2",
+      "type": "conference",
+      "title": "Multi-Fidelity Inverse Design of a 39GHz Lange Coupler Using FCNN-Based Residual Correction",
+      "authors": [
+        "Naeun Kim",
+        "Minjong Chang",
+        "Seongwoog Oh"
+      ],
+      "year": 2026,
+      "venue": "International Symposium on Antennas and Propagation (ISAP)",
+      "citation": "International Symposium on Antennas and Propagation (ISAP), Chengdu, China, 2026. Conference dates: October 27–30, 2026. Presentation: October 29, 2026",
+      "doi": null,
+      "url": null,
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "conferenceDates": "October 27–30, 2026",
+      "presentationDate": "October 29, 2026",
+      "international": true
+    },
+    {
+      "id": "conference-3",
+      "type": "conference",
+      "title": "Design of a Meander-Line Traveling Wave Antenna for High-Power Helicon Current Drive in KSTAR",
+      "authors": [
+        "Dongok Yu",
+        "Taemin Kim",
+        "Hyunho Wi",
+        "Seonjeong Wang",
+        "Seongwoog Oh"
+      ],
+      "year": 2026,
+      "venue": "Asian Workshop on Antennas and Propagation (AWAP)",
+      "citation": "Asian Workshop on Antennas and Propagation (AWAP), Seoul, Korea, Jun. 2026. Conference dates: June 17–19, 2026. Presentation: June 18, 2026",
+      "doi": null,
+      "url": null,
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 6,
+      "conferenceDates": "June 17–19, 2026",
+      "presentationDate": "June 18, 2026",
+      "eventSource": "https://sites.google.com/view/awap-2026/home/",
+      "international": true
+    },
+    {
+      "id": "conference-4",
+      "type": "conference",
+      "title": "Polarization-Multiplexed Massive Reconfigurable Intelligent Surface for LEO Satellite Networks",
+      "authors": [
+        "Hogyeom Kim",
+        "Seongwoog Oh",
+        "Seungwoo Bang",
+        "Hyunjun Yang",
+        "Jungsuek Oh"
+      ],
+      "year": 2026,
+      "venue": "IEEE International Conference on Communications (ICC)",
+      "citation": "IEEE International Conference on Communications (ICC), Glasgow, United Kingdom, May 2026. Conference dates: May 24–28, 2026. Presentation: May 27, 2026",
+      "doi": "10.1109/ICC59461.2026.11588045",
+      "url": "https://doi.org/10.1109/ICC59461.2026.11588045",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 5,
+      "conferenceDates": "May 24–28, 2026",
+      "presentationDate": "May 27, 2026",
+      "international": true
+    },
+    {
+      "id": "conference-5",
+      "type": "conference",
+      "title": "Low Power Consumption and Beam-Sustainable Reconfigurable Intelligent Surface for Fixed Wireless Communication at Millimeter-Wave 5G Band",
+      "authors": [
+        "Hogyeom Kim",
+        "Seongwoog Oh",
+        "Jeongtaek Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2025,
+      "venue": "IEEE/MTT-S International Microwave Symposium (IMS)",
+      "citation": "IEEE/MTT-S International Microwave Symposium (IMS), pp. 307-310, San Francisco, USA, Jun. 2025",
+      "doi": "10.1109/ims40360.2025.11103801",
+      "url": "https://doi.org/10.1109/ims40360.2025.11103801",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 6,
+      "metadataSource": "https://api.crossref.org/works/10.1109/ims40360.2025.11103801",
+      "international": true
+    },
+    {
+      "id": "conference-6",
+      "type": "conference",
+      "title": "A 35 GHz 8 × 8 Phased Array-Fed Dielectric Lens with 80-degrees Scan Angle for 5G Communications",
+      "authors": [
+        "Seongwoog Oh",
+        "Tian Liang",
+        "Shufan Wang",
+        "Abdulrahman Alhamed",
+        "Gabriel M. Rebeiz"
+      ],
+      "year": 2024,
+      "venue": "IEEE International Symposium on Phased Array Systems and Technology (ARRAY)",
+      "citation": "IEEE International Symposium on Phased Array Systems and Technology (ARRAY), Boston, USA, Oct. 2024",
+      "doi": "10.1109/ARRAY58370.2024.10880339",
+      "url": "https://doi.org/10.1109/ARRAY58370.2024.10880339",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 10,
+      "international": true
+    },
+    {
+      "id": "conference-7",
+      "type": "conference",
+      "title": "A High Gain Vector-Sum Phase Shifter in 28-nm CMOS for 5G communication",
+      "authors": [
+        "Jinhyun Kim",
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2022,
+      "venue": "IEEE International Symposium on Radio-Frequency Integration Technology (RFIT)",
+      "citation": "IEEE International Symposium on Radio-Frequency Integration Technology (RFIT), pp. 57-59, Busan, Korea, Aug. 2022",
+      "doi": "10.1109/RFIT54256.2022.9882510",
+      "url": "https://doi.org/10.1109/RFIT54256.2022.9882510",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 8,
+      "international": true
+    },
+    {
+      "id": "conference-8",
+      "type": "conference",
+      "title": "Sub-THz Switch-less Reconfigurable Triple-/Push-push Dual-band VCO for 6G Communication",
+      "authors": [
+        "Seongwoog Oh",
+        "Jinhyun Kim",
+        "Jungsuek Oh"
+      ],
+      "year": 2022,
+      "venue": "IEEE Radio Frequency Integrated Circuits Symposium (RFIC)",
+      "citation": "IEEE Radio Frequency Integrated Circuits Symposium (RFIC), pp. 219-222, Denver, USA, Jun. 2022",
+      "doi": "10.1109/RFIC54546.2022.9863159",
+      "url": "https://doi.org/10.1109/RFIC54546.2022.9863159",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 6,
+      "international": true
+    },
+    {
+      "id": "conference-9",
+      "type": "conference",
+      "title": "A novel miniaturized tri-band VCO utilizing a three-mode reconfigurable inductor",
+      "authors": [
+        "Seongwoog Oh",
+        "Jungsuek Oh"
+      ],
+      "year": 2021,
+      "venue": "IEEE Radio Frequency Integrated Circuits Symposium (RFIC)",
+      "citation": "IEEE Radio Frequency Integrated Circuits Symposium (RFIC), pp. 187-190, Virtual/Atlanta, USA, Jun. 2021",
+      "doi": "10.1109/RFIC51843.2021.9490477",
+      "url": "https://doi.org/10.1109/RFIC51843.2021.9490477",
+      "source": "https://sites.google.com/view/necalab/Journal",
+      "month": 6,
+      "international": true
+    }
+  ],
+  "people": [
+    {
+      "id": "seongwoog-oh",
+      "name": "Seongwoog Oh",
+      "nameKo": "오성욱",
+      "role": "Assistant Professor",
+      "focus": "RF and microwave circuits, antennas, and applied electromagnetics",
+      "image": "assets/person-seongwoog-oh.jpg",
+      "source": "https://sites.google.com/view/necalab/professor",
+      "affiliation": "School of Electrical and Computer Engineering, University of Seoul",
+      "email": "ohseongwoog@uos.ac.kr",
+      "office": "Information Technology Building, Room 511",
+      "tel": "+82-2-6490-2329",
+      "profile": "https://pure.uos.ac.kr/en/persons/seongwoog-oh/"
+    },
+    {
+      "id": "naeun-kim",
+      "name": "Naeun Kim",
+      "nameKo": "김나은",
+      "role": "Graduate Researcher",
+      "focus": "RF integrated circuits",
+      "image": "assets/person-naeun-kim.jpg",
+      "source": "https://sites.google.com/view/necalab/members"
+    },
+    {
+      "id": "donghyuk-kim",
+      "name": "Donghyuk Kim",
+      "nameKo": "김동혁",
+      "role": "Graduate Researcher",
+      "focus": "Antennas",
+      "image": "assets/person-donghyuk-kim.jpg",
+      "source": "https://sites.google.com/view/necalab/members"
+    },
+    {
+      "id": "dongok-yoo",
+      "name": "Dongok Yoo",
+      "nameKo": "유동옥",
+      "role": "Graduate Researcher",
+      "focus": "Antennas",
+      "image": "assets/person-dongok-yoo.jpg",
+      "source": "https://sites.google.com/view/necalab/members"
+    },
+    {
+      "id": "taemin-kim",
+      "name": "Taemin Kim",
+      "nameKo": "김태민",
+      "role": "Graduate Researcher",
+      "focus": "Antennas",
+      "image": "assets/person-taemin-kim.jpg",
+      "source": "https://sites.google.com/view/necalab/members"
+    },
+    {
+      "id": "sangjoon-oh",
+      "name": "오상준",
+      "nameKo": "오상준",
+      "role": "Graduate Researcher",
+      "focus": "RF integrated circuits",
+      "image": "assets/person-sangjoon-oh.jpg",
+      "source": "https://sites.google.com/view/necalab/members"
+    },
+    {
+      "id": "minjong-chang",
+      "name": "Minjong Chang",
+      "nameKo": "장민종",
+      "role": "Graduate Researcher",
+      "focus": "Artificial intelligence",
+      "image": "assets/person-minjong-chang.jpg",
+      "source": "https://sites.google.com/view/necalab/members"
+    }
+  ],
+  "research": [
+    {
+      "id": "physical-ai",
+      "title": "Physical AI & RF Design",
+      "titleKo": "피지컬 AI · RF 설계",
+      "summary": "We apply machine learning to electromagnetic simulation and RF design, with an emphasis on efficient design exploration and dependable training data.",
+      "summaryKo": "전자기 시뮬레이션과 RF 회로 설계에 AI를 적용하여 설계 탐색을 효율화하고 신뢰도 높은 학습 데이터를 구축합니다.",
+      "image": "assets/research-physical-ai.jpg",
+      "source": "https://sites.google.com/view/necalab/home",
+      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field1.png"
+    },
+    {
+      "id": "satellite",
+      "title": "6G & Satellite Communications",
+      "titleKo": "6G · 위성통신",
+      "summary": "Our work spans millimeter-wave beamforming ICs, antennas, and modules for next-generation wireless and low-Earth-orbit satellite links.",
+      "summaryKo": "차세대 무선과 저궤도 위성 링크를 위한 밀리미터파 빔포밍 IC, 안테나 및 모듈을 연구합니다.",
+      "image": "assets/research-satellite.jpg",
+      "source": "https://sites.google.com/view/necalab/home",
+      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field2.png"
+    },
+    {
+      "id": "radar",
+      "title": "Radar & Autonomous Sensing",
+      "titleKo": "레이더 · 자율주행 센싱",
+      "summary": "We study radar front ends and antenna lenses for autonomous sensing, alongside ground-penetrating antennas for subsurface inspection.",
+      "summaryKo": "자율주행 센싱용 레이더 프런트엔드와 안테나 렌즈, 지하 공간 탐사를 위한 지표투과 안테나를 연구합니다.",
+      "image": "assets/research-radar.jpg",
+      "source": "https://sites.google.com/view/necalab/home",
+      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field3.png"
+    },
+    {
+      "id": "fusion",
+      "title": "Nuclear Fusion & Extreme RF",
+      "titleKo": "핵융합 · 극한환경 RF",
+      "summary": "We explore high-power RF and antennas for demanding environments, including plasma heating and current drive for fusion research.",
+      "summaryKo": "핵융합 플라즈마 가열과 전류 구동 등 극한 환경을 위한 고출력 RF 및 안테나 기술을 연구합니다.",
+      "image": "assets/research-fusion.jpg",
+      "source": "https://sites.google.com/view/necalab/home",
+      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field4.png"
+    },
+    {
+      "id": "biomed",
+      "title": "Biomedical Electromagnetics",
+      "titleKo": "바이오메디컬 전자파",
+      "summary": "We investigate noninvasive sensing and the use of RF and microwave devices in biomedical research.",
+      "summaryKo": "비침습 바이오 센싱과 바이오메디컬 연구를 위한 RF·마이크로파 소자를 연구합니다.",
+      "image": "assets/research-biomed.jpg",
+      "source": "https://sites.google.com/view/necalab/home",
+      "imageSource": "https://github.com/ohseongwoog/necalab/blob/da182b89ce956e63ca3ab7431dcca1763d92e27b/website/research_field5.png"
+    }
+  ],
+  "news": [
+    {
+      "id": "sk-hynix-vpp",
+      "title": "SK hynix Visiting Partners Professor collaboration",
+      "titleKo": "SK하이닉스 VPP 선정 및 협력",
+      "summary": "The collaboration investigates RF characterization of multi-TSV structures, inductance extraction, and simulation validation.",
+      "summaryKo": "다중 TSV의 고주파 특성을 측정하고 인덕턴스 추출 및 시뮬레이션 검증 방법을 연구합니다.",
+      "label": "Industry collaboration",
+      "source": "https://sites.google.com/view/necalab/news"
+    },
+    {
+      "id": "nrf-2026",
+      "title": "National Research Foundation of Korea award",
+      "titleKo": "2026 한국연구재단 개인기초연구 핵심연구 선정",
+      "summary": "Selected for a 2026 Basic Research funding program to develop an ISAC-V physical AI platform for indoor and outdoor autonomous driving.",
+      "summaryKo": "실내외 자율주행의 인지·판단·제어를 통합하는 ISAC-V 기반 피지컬 AI 플랫폼 연구를 수행합니다.",
+      "label": "Research funding",
+      "source": "https://sites.google.com/view/necalab/news"
+    },
+    {
+      "id": "sk-hynix-itap",
+      "title": "SK hynix i-TAP appointment",
+      "titleKo": "SK하이닉스 i-TAP 프로그램 자문 위촉",
+      "summary": "Prof. Oh was appointed to advise and support education on enabling technologies for next-generation high-bandwidth memory.",
+      "summaryKo": "오성욱 교수가 차세대 고대역폭 메모리(HBM) 요소 기술 분야의 연구 자문 및 교육을 맡았습니다.",
+      "label": "Industry collaboration",
+      "source": "https://sites.google.com/view/necalab/news"
+    },
+    {
+      "id": "idec-2025",
+      "title": "Gold award at the 2025 Smart Circuit Design Challenge",
+      "titleKo": "2025 스마트전자회로설계 챌린지 지도팀 금상",
+      "summary": "A team advised by Prof. Oh won gold for its low-cost 2.45 GHz RF thermal stimulation circuit design.",
+      "summaryKo": "오성욱 교수 지도팀이 2.45 GHz 대역의 저비용 RF 열 자극기 설계로 금상을 받았습니다.",
+      "label": "Student award",
+      "source": "https://sites.google.com/view/necalab/news"
+    }
+  ]
+}
