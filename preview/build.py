@@ -1,7 +1,7 @@
 """Generate the six static NECA preview pages. Python standard library only."""
 from pathlib import Path
 from html import escape
-import json, re, math
+import json, re
 P=Path(__file__).resolve().parent
 def x(t): return escape(str(t or ''),quote=True)
 def pair(ko,en): return '<span class="ko" lang="ko">'+x(ko)+'</span><span class="en" lang="en">'+x(en)+'</span>'
@@ -42,39 +42,41 @@ def brand():
 def nav(pg):return ''.join('<a href="'+name+'.html"'+(' aria-current="page"' if pg==name else '')+'>'+pair(ko,en)+'</a>' for name,ko,en in pages)
 def shell(pg,content,kt,et):
  title='NECA Lab. · '+kt+' / '+et
- return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#003987"><meta name="description" content="서울시립대학교 차세대 전자파 회로 및 응용 연구실 | NECA Lab., University of Seoul."><title>{x(title)}</title><link href="assets/site.css?v=2" rel="stylesheet"><script defer src="assets/site.js?v=2"></script></head>
+ extra=('<link href="assets/interact.css?v=1" rel="stylesheet"><script defer src="assets/deck.js?v=1"></script>' if pg in ('index','research') else '')+('<script defer src="assets/puzzles.js?v=1"></script>' if pg=='index' else '')
+ return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#003987"><meta name="description" content="서울시립대학교 차세대 전자파 회로 및 응용 연구실 | NECA Lab., University of Seoul."><title>{x(title)}</title><link href="assets/site.css?v=3" rel="stylesheet"><script defer src="assets/site.js?v=3"></script>{extra}</head>
 <body data-page="{pg}"><a class="skip" href="#main">{pair('본문 바로가기','Skip to content')}</a><header><div class="top"><div class="wrap"><span>{pair('서울시립대학교 · 전자전기컴퓨터공학부','University of Seoul · School of Electrical and Computer Engineering')}</span><span class="preview"><i></i>{pair('디자인 시안','Design preview')}</span></div></div><div class="bar wrap"><a class="brand" href="index.html" aria-label="NECA Lab. Home">{brand()}</a><nav id="navigation" aria-label="메인 메뉴 / Main menu">{nav(pg)}</nav><div class="nav-controls"><button type="button" id="language" hidden><span class="ko" lang="en">EN</span><span class="en" lang="ko">한국어</span></button><button type="button" class="hamb" id="menu-trigger" aria-expanded="false" aria-controls="navigation" aria-label="메뉴 / Menu" hidden><span></span><span></span></button></div></div></header><main id="main">{content}</main><footer><div class="foot-main wrap"><div><div class="foot-logo">NECA <span>Lab.</span></div><p>{pair('차세대 전자파 회로 및 응용 연구실','Next-gen. Electromagnetic Circuits and Application Lab.')}<br>{pair('서울시립대학교 전자전기컴퓨터공학부','School of Electrical and Computer Engineering, University of Seoul')}</p></div><div class="footer-links"><a href="mailto:{piemail}">{piemail}</a><a href="{legacy}/home">{pair('현행 연구실 홈페이지','Current lab website')}</a><a href="https://www.uos.ac.kr/">{pair('서울시립대학교','University of Seoul')}</a></div></div><div class="foot-base wrap"><span>NECA Lab. · University of Seoul</span><span>{pair('검토용 디자인 시안','Website design preview')}</span></div></footer></body></html>'''
-def num(x):return f'{x:.2f}'
-def plot(deg):
- # The illustration computes the normalized principal-plane cut of an ideal uniform 8x8 planar aperture.  At phi=0 the second array-factor term equals 1.
- R=153; ox,oy=265,195; th0=math.radians(deg)
- def af(t):
-  u=math.pi*(math.sin(t)-math.sin(th0))/2
-  return abs(math.sin(8*u)/(8*math.sin(u))) if abs(math.sin(u))>1e-9 else 1
- def point(t,r):return (ox+r*math.sin(t),oy-r*math.cos(t))
- def path(points):return ' '.join(('M' if i==0 else 'L')+num(u)+' '+num(v) for i,(u,v) in enumerate(points))
- grid=''
- for rad in [R/3,2*R/3,R]:
-  pts=[point(math.radians(a),rad) for a in range(-90,91,2)]
-  grid+=f'<path d="{path(pts)}" class="polar-grid"/>'
- for a in range(-90,91,15):
-  xx,yy=point(math.radians(a),R+5); grid+=f'<path d="M {ox} {oy} L {num(xx)} {num(yy)}" class="polar-grid"/>'
- for ang,txt,dx,dy in [(-60,'−60°',-20,2),(0,'0°',0,-1),(60,'+60°',19,2)]:
-  xx,yy=point(math.radians(ang),R+12);grid+=f'<text class="axis-label" x="{num(xx+dx)}" y="{num(yy+dy)}" text-anchor="middle">{txt}</text>'
- pts=[point(math.radians(a/4),R*af(math.radians(a/4))) for a in range(-360,361)]
- spec=f'<path class="pattern-fill" d="M{ox} {oy} {path(pts).replace("M","L",1)} Z"/><path class="pattern-line" d="{path(pts)}"/>'
- xx,yy=point(th0,R); spec+=f'<circle cx="{num(xx)}" cy="{num(yy)}" r="4" fill="#e7fa9b"/>'
- # Show the planar patch aperture separately beneath the polar cut.
- aperture=''
- for row in range(8):
-  for col in range(8):
-   u=196+col*13+row*6.8;v=217+row*3.8-col*0.55
-   aperture+=f'<path d="M{num(u)} {num(v)}l9.5 -.4 4.5 2.6 -9.5 .4z" fill="#6cade2" opacity="{num(.57+.34*(row%2==0))}"/>'
- return f'<g class="scan-pattern" data-scan="{deg}"'+('' if deg==0 else ' style="display:none"')+f'>{grid}{spec}{aperture}</g>'
-def rig():
- groups=''.join(plot(d) for d in [-25,0,25])
- ctrls=''.join(f'<button class="angle" data-angle="{d}" aria-pressed="{str(d==0).lower()}" type="button">{s}</button>' for d,s in [(-25,'−25°'),(0,'0°'),(25,'+25°')])
- return '<figure class="rig"><div class="rig-head"><span>'+pair('빔 조향 실험','Beam steering study')+'</span><span class="mono">8 × 8&nbsp; / &nbsp;λ/2</span></div><svg class="polar" viewBox="0 0 530 264" aria-label="균일 배열의 정규화 주평면 배열인자 / Normalized principal-plane array factor" role="img">'+groups+'</svg><div class="rig-controls"><span>'+pair('조향각','Steering angle')+'</span><div class="angle-group">'+ctrls+'</div></div><figcaption>'+pair('균일 배열의 정규화 배열인자 · 계산 예시, 측정값 아님','Normalized array factor for a uniform array · calculated, not measured')+'</figcaption></figure>'
+def activity_icon(g):
+ if g=='ai':
+  v='<path d="M10 10h37v32H10zM15 5h37v32" fill="#183d65" stroke="#a8c4dd" stroke-width="1.7" stroke-linejoin="round"/><path d="M16 17h20m-20 5h25" stroke="#a8c4dd" stroke-width="2"/><rect x="15" y="27" width="27" height="8" rx="1.5" fill="#cfed8e"/><path d="M19 31h16" stroke="#326a51" stroke-width="1.5"/><circle cx="48" cy="39" r="9" fill="#14385a" stroke="#ceeb85" stroke-width="2"/><path d="m55 46 7 6" stroke="#ceeb85" stroke-width="3" stroke-linecap="round"/>'
+ else:
+  v='<path d="M6 14h25v24H6z" fill="#1d5070" stroke="#a3d8ea" stroke-width="2"/><path d="M10 9v5m6-5v5m6-5v5m-12 24v5m6-5v5m6-5v5M1 19h5m-5 7h5m-5 7h5" stroke="#a3d8ea" stroke-width="1.6"/><path d="M31 26h6l3-5 4 10 4-10 3 5h5V13m0 4-6-8m6 8 6-8" fill="none" stroke="#ceeb85" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 15q4 4 0 8" fill="none" stroke="#a3d8ea" stroke-width="1.4"/>'
+ return '<svg class="activity-icon" viewBox="0 0 66 56" aria-hidden="true" focusable="false">'+v+'</svg>'
+activities=[
+ ('ai','AI 탐정','AI Detective','어떤 결론에 근거가 있을까요?','Which conclusion does the evidence support?','기록 네 장에서 결정적인 단서 두 장을 고르세요.','Four records. Two decisive clues. Can you support a conclusion?'),
+ ('rf','RF 신호 잇기','Signal Builder','칩의 신호를 안테나까지 보낼 수 있을까요?','Can you get a chip’s signal to the antenna?','부품을 골라 송신·수신 경로를 만들고 정합 문제를 풀어보세요.','Pick components to build transmit and receive paths, then solve a matching puzzle.')]
+def gateway():
+ h='<aside class="gateway" aria-label="연구 퍼즐 / Research puzzles"><div class="gateway-head"><span>'+pair('미니 연구실','Mini lab')+'</span><small>'+pair('한 문제 약 1분','About 1 min per round')+'</small></div>'
+ for g,ko,en,qk,qe,sk,se in activities:
+  h+='<a class="gateway-link" href="#puzzle-'+g+'"><span class="gateway-icon">'+activity_icon(g)+'</span><span class="gateway-text"><strong>'+pair(ko,en)+'</strong><span>'+pair(qk,qe)+'</span></span><span class="gateway-play">'+pair('시작','Play')+'</span></a>'
+ return h+'</aside>'
+def bench():
+ h='<section class="bench" id="hands-on"><div class="wrap section">'+sect('MINI LAB','1분 연구 퍼즐','One-minute research puzzles')+'<div class="challenges">'
+ for g,ko,en,qk,qe,sk,se in activities:
+  note=pair('가상 기록을 사용하는 모의 퍼즐입니다. 실제 AI 모델에 접속하지 않습니다.','A simulation using fictional records, not a live AI model.') if g=='ai' else pair('단순화한 회로로 신호 흐름을 익히는 퍼즐입니다.','A signal-flow puzzle using simplified circuits.')
+  h+='<details class="challenge" id="puzzle-'+g+'"><summary><span class="challenge-symbol">'+activity_icon(g)+'</span><span class="challenge-caption"><strong>'+pair(ko,en)+'</strong><span>'+pair(sk,se)+'</span></span><span class="challenge-open" aria-hidden="true"></span></summary><p class="challenge-note">'+note+'</p><div data-game="'+g+'"></div><noscript><p class="script-note">'+pair('대화형 퍼즐을 풀려면 브라우저에서 자바스크립트를 켜 주세요.','Enable JavaScript in your browser to play the interactive rounds.')+'</p></noscript></details>'
+ return h+'</div></div></section>'
+def deck(rich=False):
+ key='fields' if rich else 'focus';track=key+'-track';level='h2' if rich else 'h3'
+ h='<div class="research-deck '+('deck-rich' if rich else 'deck-brief')+'" data-deck role="region" aria-label="연구 분야 카드"><div class="deck-bar"><p class="deck-help">'+pair('옆으로 넘기거나 버튼으로 탐색하세요.','Swipe or use the buttons to browse.')+'</p><div class="deck-tools" hidden><button type="button" data-deck-prev aria-controls="'+track+'">'+pair('이전','Previous')+'</button><span data-deck-index class="deck-index" role="status" aria-live="polite" aria-atomic="true"></span><button type="button" data-deck-next aria-controls="'+track+'">'+pair('다음','Next')+'</button></div></div><div id="'+track+'" class="deck-track" data-deck-track tabindex="0" aria-label="연구 분야 목록">'
+ for i,r in enumerate(research):
+  if rich:
+   h+='<article class="deck-card pillar" data-deck-card id="'+x(r['id'])+'" tabindex="-1" aria-labelledby="title-'+x(r['id'])+'"><figure class="deck-figure">'+diagram(r)+'<figcaption>'+pair(r['captionKo'],r['caption'])+'</figcaption></figure><div class="deck-copy"><h2 id="title-'+x(r['id'])+'">'+r_name(r)+'</h2><p>'+r_sum(r)+'</p>'
+   if r.get('example'):
+    ex=r['example'];h+='<div class="related"><span class="eyebrow">'+pair('공개 연구 사례','Explore an example')+'</span><a href="'+x(ex['href'])+'">'+pair(ex['labelKo'],ex['label'])+'</a></div>'
+   h+='</div></article>'
+  else:
+   h+='<article class="deck-card" data-deck-card><a class="deck-brief-link" href="research.html#'+x(r['id'])+'"><span class="deck-illustration">'+img(r['image'],'')+'</span><div class="deck-copy"><h3>'+r_name(r)+'</h3><span class="deck-blurb">'+pair(r['shortKo'],r['short'])+'</span></div></a></article>'
+ return h+'</div></div>'
 def r_name(r):return pair(r['titleKo'],r['title'])
 def r_sum(r):return pair(r['summaryKo'],r['summary'])
 def n_name(z):return pair(z['titleKo'],z['title'])
@@ -96,32 +98,22 @@ def home_news():
  h+=news_entry(lead,True)+'<div class="bulletin-more">'+''.join(news_entry(z,False) for z in highlights if z)+'</div></div></div></section>'
  return h
 def home_areas():
- h='<section class="wrap section focus-section" id="research-areas">'+sect('RESEARCH','연구 분야','Our research','research.html','연구 자세히 보기','Explore our research')+'<div class="focus-grid">'
- for r in research:
-  h+='<a class="focus-card" href="research.html#'+x(r['id'])+'"><div class="focus-art">'+img(r['image'],'')+'</div><div class="focus-copy"><h3>'+r_name(r)+'</h3><p>'+pair(r['shortKo'],r['short'])+'</p></div></a>'
- return h+'</div></section>'
+ return '<section class="wrap section focus-section" id="research-areas">'+sect('RESEARCH','연구 분야','Our research','research.html','연구 자세히 보기','Explore our research')+deck()+'</section>'
 def home_outputs():
  journals,talks=recent_outputs(pubs)
  def column(rows,ko,en):
   return '<div class="output-group"><h3>'+pair(ko,en)+'</h3><ul>'+''.join('<li data-kind="'+x(r['type'])+'"><span class="output-meta"><i lang="en">'+x(r['venue'])+'</i> · '+x(r['year'])+'</span><h4 lang="en"><a href="publications.html#'+x(r['id'])+'">'+x(r['title'])+'</a></h4></li>' for r in rows)+'</ul></div>'
  return '<section class="tint" id="recent-outputs"><div class="wrap section">'+sect('PUBLICATIONS','최근 연구 성과','Recent research outputs','publications.html','성과 전체 보기','All publications')+'<div class="output-grid">'+column(journals,'저널 논문','Peer-reviewed journals')+column(talks,'국제학회 발표','International conference presentations')+'</div></div></section>'
 def home():
- h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+rig()+'</div></section>'
- h+=home_news()+home_areas()+home_outputs()
+ h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+gateway()+'</div></section>'
+ h+=home_news()+bench()+home_areas()+home_outputs()
  return h+'<section class="section wrap"><div class="team-strip"><div>'+tag('PEOPLE')+'<h2>'+pair('연구실 구성원','Meet the team')+'</h2></div><div><p>'+pair('전자파와 회로를 함께 연구하는 사람들을 소개합니다.','Meet the people studying electromagnetic waves and circuits together.')+'</p>'+txtlink('people.html','구성원 소개','Browse people')+'</div></div></section>'
 def concept():
  orig=(img(logo,'NECA Lab. original mark','logo-example')+'<span>'+pair('기존 로고','Original mark')+'</span>') if logo else ''
  return '<details class="concept"><summary>'+pair('연구실 로고 디자인 제안','Lab identity design study')+'</summary><div class="concept-grid">'+('<div class="mark-tile">'+orig+'</div>' if orig else '')+'<div class="mark-tile">'+img('assets/em-ai-study.svg','Proposed symbol: perpendicular fields and a circuit trace','logo-example')+'<span>'+pair('EM × AI · 제안안','EM × AI · concept only')+'</span></div><p>'+pair('전기장과 자기장의 직교 관계를 두 축으로, 전파 방향을 따라 이어지는 점을 회로·AI 연결선으로 표현했습니다. 기존 로고를 대체하지 않습니다.','Two axes represent orthogonal electric and magnetic fields. A line of circuit nodes suggests propagation and AI connections. This is a separate concept, not a replacement for the original.')+'</p></div></details>'
 def research_page():
  h=pagehead('RESEARCH','연구 분야','Research','다섯 연구 분야에서 우리가 풀고 있는 문제를 소개합니다. 그림은 원리를 설명한 개념도이며 측정 결과가 아닙니다.','Explore the questions behind our five research fields. The diagrams illustrate principles, not measured results.')
- h+='<div class="wrap section areas"><div role="navigation" class="area-nav" aria-label="연구 분야 바로가기 / Research fields">'
- for r in research:h+='<a href="#'+x(r['id'])+'">'+r_name(r)+'</a>'
- h+='</div>'
- for r in research:
-  h+='<article class="area pillar" id="'+x(r['id'])+'"><figure class="area-figure"><div class="area-image">'+diagram(r)+'</div><figcaption>'+pair(r['captionKo'],r['caption'])+'</figcaption></figure><div><h2>'+r_name(r)+'</h2><p>'+r_sum(r)+'</p>'
-  if r.get('example'):
-   ex=r['example'];h+='<div class="related"><span class="eyebrow">'+pair('공개 연구 사례','Explore an example')+'</span><a href="'+x(ex['href'])+'">'+pair(ex['labelKo'],ex['label'])+'</a></div>'
-  h+='</div></article>'
+ h+='<div class="wrap section areas"><details class="topic-index"><summary>'+pair('분야 바로가기','Jump to a field')+'</summary><div class="topic-links" role="navigation" aria-label="연구 분야 바로가기 / Research fields">'+''.join('<a href="#'+x(r['id'])+'">'+r_name(r)+'</a>' for r in research)+'</div></details>'+deck(True)
  return h+concept()+'</div>'
 def people_page():
  h=pagehead('PEOPLE','구성원','People','연구책임자와 대학원 연구원들을 소개합니다.','Meet our principal investigator and graduate researchers.')

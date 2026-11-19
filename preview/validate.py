@@ -48,7 +48,7 @@ for r in fields:
  for k in ['summary','summaryKo']:
   assert 0<len(re.findall(r'[.!?](?:\s|$)',r[k]))<=2,r['id']
  for k in ['short','shortKo','caption','captionKo','alt','altKo']:assert r[k].strip(),r['id']
-h=home(); order=['class="hero"','id="lab-news"','id="research-areas"','id="recent-outputs"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
+h=home(); order=['class="hero"','id="lab-news"','id="hands-on"','id="research-areas"','id="recent-outputs"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
 j,c=recent_outputs(d['publications']);assert len(j)==len(c)==2
 assert all(r['type']=='journal' and r['peerReviewed'] is True for r in j)
 assert all(r['type']=='conference' and r['international'] is True and r['presentationDate'] for r in c)
@@ -57,3 +57,11 @@ for r in j+c:assert f'publications.html#{r["id"]}' in h
 for r in fields:
  assert f'research.html#{r["id"]}' in h and r['altKo'] in research_page()
 print('PASS homepage section order, strict academic output selection, five bilingual areas and five original vector diagrams.')
+
+for page in (h,research_page()):
+ assert 'data-deck-prev' in page and 'data-deck-next' in page and 'data-deck-index' in page
+ assert page.count('data-deck-card')==5 and 'data-deck-track' in page
+assert 'data-angle=' not in h and 'scan-pattern' not in h and 'id="lab-news"' in h
+assert all(('href="#puzzle-'+key+'"') in h and ('data-game="'+key+'"') in h for key in ('ai','rf'))
+assert 'fictional records' in h and 'live AI model' in h
+print('PASS two interactive puzzle entry points, news before game boards, and five accessible swipe cards on both pages.')
