@@ -48,10 +48,14 @@ for r in fields:
  assert any(el.tag.endswith('linearGradient') for el in root.iter())
  assert any(el.tag.endswith('radialGradient') for el in root.iter())
  assert not root.findall('.//{http://www.w3.org/2000/svg}image') and not root.findall('.//{http://www.w3.org/2000/svg}script')
+ portrait=P/('assets/portrait-'+r['id']+'.svg')
+ pt=ET.parse(portrait).getroot()
+ assert pt.get('viewBox')=='0 0 450 600' and len(pt.findall('.//{http://www.w3.org/2000/svg}path'))>=9, r['id']
+ assert not pt.findall('.//{http://www.w3.org/2000/svg}script') and not pt.findall('.//{http://www.w3.org/2000/svg}image')
  for k in ['summary','summaryKo']:
   assert 0<len(re.findall(r'[.!?](?:\s|$)',r[k]))<=2,r['id']
  for k in ['short','shortKo','caption','captionKo','alt','altKo']:assert r[k].strip(),r['id']
-h=home(); order=['class="hero"','id="hands-on"','id="lab-news"','id="research-areas"','id="recent-outputs"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
+h=home(); order=['class="hero"','id="research-areas"','id="lab-news"','id="recent-outputs"','class="team-strip"','id="hands-on"'];assert [h.index(m) for m in order]==sorted(h.index(m) for m in order)
 j,c=recent_outputs(d['publications']);assert len(j)==len(c)==2
 assert all(r['type']=='journal' and r['peerReviewed'] is True for r in j)
 assert all(r['type']=='conference' and r['international'] is True and r['presentationDate'] for r in c)
@@ -64,11 +68,16 @@ print('PASS homepage section order, strict academic output selection, five bilin
 for page in (h,research_page()):
  assert 'data-deck-prev' in page and 'data-deck-next' in page and 'data-deck-index' in page
  assert page.count('data-deck-card')==5 and 'data-deck-track' in page
-assert h.count('type="range"')==2 and all(('id="lab-'+key+'-range"') in h and ('id="puzzle-'+key+'"') in h for key in ('ai','rf'))
+assert 'vd-portrait' in h and 'vd-portrait' not in research_page()
+assert h.count('data-visual-deck')==1 and h.count('type="range"')==6
+for key in ('ai','rf'):
+ assert 'id="puzzle-'+key+'"' in h
+ part=h.split('id="lab-'+key+'"',1)[1].split('</article>',1)[0]
+ assert part.count('type="range"')==3, key
 assert 'class="challenge"' not in h and 'data-game=' not in h and 'data-wave' in h
 assert 'data-vd-open' in h and 'class="field-art"' not in h and 'data-art-expand' not in h
 for label in ['textarea','select','button','details','input type="text"']:
- off=h.split('id="hands-on"',1)[1].split('</aside>',1)[0]
+ off=h.split('id="hands-on"',1)[1].split('</section>',1)[0]
  assert ('<'+label) not in off, label
 for key in ['assets/micro-labs.js','assets/visual-deck.js']:
  js=(P/key).read_text()
@@ -81,4 +90,4 @@ for page in [h,research_page()]:
  for m in re.finditer(r'<button [^>]*data-vd-open.*?</button>',page,re.S):
   assert not re.search(r'<p\b',m.group()) and 'class="vd-heading"' in m.group()
   assert not re.search(r'[가-힣]',m.group())
-print('PASS two one-slider models, native direct links, five English visual disclosures, public sources and no legacy workbenches.')
+print('PASS two three-control challenges, native and legacy links, English research cards, public sources and no legacy workbenches.')

@@ -1,7 +1,7 @@
 """Generate the six static NECA preview pages. Python standard library only."""
 from pathlib import Path
 from html import escape
-from micro_labs import hero_labs
+from micro_labs import bottom_labs
 from visual_deck import deck as visual_deck
 import hashlib, json, re
 P=Path(__file__).resolve().parent
@@ -49,7 +49,7 @@ def shell(pg,content,kt,et):
  title='NECA Lab. · '+kt+' / '+et
  extra=''
  if pg in ('index','research'):extra+='<link href="'+asset('visual-deck.css')+'" rel="stylesheet"><script defer src="'+asset('visual-deck.js')+'"></script>'
- if pg=='index':extra+='<link href="'+asset('micro-labs.css')+'" rel="stylesheet"><script defer src="'+asset('micro-labs.js')+'"></script>'
+ if pg=='index':extra+='<link href="'+asset('home.css')+'" rel="stylesheet"><link href="'+asset('micro-labs.css')+'" rel="stylesheet"><script defer src="'+asset('micro-labs.js')+'"></script>'
  return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#003987"><meta name="description" content="서울시립대학교 차세대 전자파 회로 및 응용 연구실 | NECA Lab., University of Seoul."><title>{x(title)}</title><link href="assets/site.css?v=3" rel="stylesheet"><script defer src="assets/site.js?v=3"></script>{extra}</head>
 <body data-page="{pg}"><a class="skip" href="#main">{pair('본문 바로가기','Skip to content')}</a><header><div class="top"><div class="wrap"><span>{pair('서울시립대학교 · 전자전기컴퓨터공학부','University of Seoul · School of Electrical and Computer Engineering')}</span><span class="preview"><i></i>{pair('디자인 시안','Design preview')}</span></div></div><div class="bar wrap"><a class="brand" href="index.html" aria-label="NECA Lab. Home">{brand()}</a><nav id="navigation" aria-label="메인 메뉴 / Main menu">{nav(pg)}</nav><div class="nav-controls"><button type="button" id="language" hidden><span class="ko" lang="en">EN</span><span class="en" lang="ko">한국어</span></button><button type="button" class="hamb" id="menu-trigger" aria-expanded="false" aria-controls="navigation" aria-label="메뉴 / Menu" hidden><span></span><span></span></button></div></div></header><main id="main">{content}</main><footer><div class="foot-main wrap"><div><div class="foot-logo">NECA <span>Lab.</span></div><p>{pair('차세대 전자파 회로 및 응용 연구실','Next-gen. Electromagnetic Circuits and Application Lab.')}<br>{pair('서울시립대학교 전자전기컴퓨터공학부','School of Electrical and Computer Engineering, University of Seoul')}</p></div><div class="footer-links"><a href="mailto:{piemail}">{piemail}</a><a href="{legacy}/home">{pair('현행 연구실 홈페이지','Current lab website')}</a><a href="https://www.uos.ac.kr/">{pair('서울시립대학교','University of Seoul')}</a></div></div><div class="foot-base wrap"><span>NECA Lab. · University of Seoul</span><span>{pair('검토용 디자인 시안','Website design preview')}</span></div></footer></body></html>'''
 def n_name(z):return pair(z['titleKo'],z['title'])
@@ -70,17 +70,16 @@ def home_news():
   return '<article class="bulletin-item'+(' lead' if featured else '')+'"><span class="news-kicker">'+pair(k,e)+'</span><h3><a href="news.html#'+x(z['id'])+'">'+n_name(z)+'</a></h3>'+('<p>'+n_sum(z)+'</p>' if featured else '')+'</article>'
  h+=news_entry(lead,True)+'<div class="bulletin-more">'+''.join(news_entry(z,False) for z in highlights if z)+'</div></div></div></section>'
  return h
-def home_areas():
- return '<section class="wrap section focus-section" id="research-areas" lang="en"><div class="sect-head"><div>'+tag('RESEARCH')+'<h2>Our research</h2></div><a class="text-link" href="research.html">Explore our research</a></div>'+visual_deck(research)+'</section>'
 def home_outputs():
  journals,talks=recent_outputs(pubs)
  def column(rows,ko,en):
   return '<div class="output-group"><h3>'+pair(ko,en)+'</h3><ul>'+''.join('<li data-kind="'+x(r['type'])+'"><span class="output-meta"><i lang="en">'+x(r['venue'])+'</i> · '+x(r['year'])+'</span><h4 lang="en"><a href="publications.html#'+x(r['id'])+'">'+x(r['title'])+'</a></h4></li>' for r in rows)+'</ul></div>'
  return '<section class="tint" id="recent-outputs"><div class="wrap section">'+sect('PUBLICATIONS','최근 연구 성과','Recent research outputs','publications.html','성과 전체 보기','All publications')+'<div class="output-grid">'+column(journals,'저널 논문','Peer-reviewed journals')+column(talks,'국제학회 발표','International conference presentations')+'</div></div></section>'
 def home():
- h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('NECA LAB.  /  UNIVERSITY OF SEOUL')+'<h1><span class="ko" lang="ko">차세대 전자파<br>회로 및 응용 연구실<span class="term">.</span></span><span class="en" lang="en">Electromagnetic<br>circuits and<br>applications<span class="term">.</span></span></h1><p>'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><div class="actions">'+button('research.html','연구 분야 보기','Explore research','white')+button('join.html','연구실 합류 안내','Join the lab','transparent')+'</div></div>'+hero_labs()+'</div></section>'
- h+=home_news()+home_areas()+home_outputs()
- return h+'<section class="section wrap"><div class="team-strip"><div>'+tag('PEOPLE')+'<h2>'+pair('연구실 구성원','Meet the team')+'</h2></div><div><p>'+pair('전자파와 회로를 함께 연구하는 사람들을 소개합니다.','Meet the people studying electromagnetic waves and circuits together.')+'</p>'+txtlink('people.html','구성원 소개','Browse people')+'</div></div></section>'
+ h='<section class="hero"><div class="hero-inner wrap"><div class="hero-copy">'+tag('UNIVERSITY OF SEOUL')+'<h1 class="hero-wordmark" lang="en" aria-label="NECA Lab."><span class="word">NECA</span><span class="lab"> Lab<span class="term">.</span></span></h1><p class="hero-fullname">'+pair('차세대 전자파 회로 및 응용 연구실','Next-generation Electromagnetic Circuits and Applications Lab')+'</p><p class="hero-story">'+pair('전파로 땅속을 살피고, AI로 고주파 회로를 설계하고, 적층한 칩 사이를 지나는 신호를 측정합니다.','We use radar to see below ground, AI to design radio-frequency circuits, and measurements to trace signals between stacked chips.')+'</p><a class="hero-research-link" href="research.html">'+pair('연구 분야 전체 보기','Explore all research')+' <b aria-hidden="true">↗</b></a></div><div class="hero-gallery" id="research-areas" lang="en">'+visual_deck(research)+'</div></div></section>'
+ h+=home_news()+home_outputs()
+ h+='<section class="section wrap"><div class="team-strip"><div>'+tag('PEOPLE')+'<h2>'+pair('연구실 구성원','Meet the team')+'</h2></div><div><p>'+pair('전자파와 회로를 함께 연구하는 사람들을 소개합니다.','Meet the people studying electromagnetic waves and circuits together.')+'</p>'+txtlink('people.html','구성원 소개','Browse people')+'</div></div></section>'
+ return h+bottom_labs()
 def concept():
  orig=(img(logo,'NECA Lab. original mark','logo-example')+'<span>'+pair('기존 로고','Original mark')+'</span>') if logo else ''
  return '<details class="concept"><summary>'+pair('연구실 로고 디자인 제안','Lab identity design study')+'</summary><div class="concept-grid">'+('<div class="mark-tile">'+orig+'</div>' if orig else '')+'<div class="mark-tile">'+img('assets/em-ai-study.svg','Proposed symbol: perpendicular fields and a circuit trace','logo-example')+'<span>'+pair('EM × AI · 제안안','EM × AI · concept only')+'</span></div><p>'+pair('전기장과 자기장의 직교 관계를 두 축으로, 전파 방향을 따라 이어지는 점을 회로·AI 연결선으로 표현했습니다. 기존 로고를 대체하지 않습니다.','Two axes represent orthogonal electric and magnetic fields. A line of circuit nodes suggests propagation and AI connections. This is a separate concept, not a replacement for the original.')+'</p></div></details>'

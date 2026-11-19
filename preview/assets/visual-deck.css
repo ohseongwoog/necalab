@@ -63,3 +63,38 @@
 @keyframes vd-wave-4{0%,38%,68%,100%{opacity:0}46%,55%{opacity:.95}}
 @media(max-width:600px){.vd-track{grid-auto-columns:calc(100% - 23px);gap:9px}.vd-heading{left:.72rem;bottom:.56rem}.vd-controls{gap:.25rem}.vd-controls button,.vd-close{font-size:.84rem}.vd-art::after{height:24%}}
 @media(prefers-reduced-motion:reduce){.visual-deck *{scroll-behavior:auto!important}.vd-art .art-fx{animation:none!important}}
+
+/* Home alone uses native 3:4 artwork with a narrow glimpse of the next card. */
+.vd-portrait{
+ --vd-peek:39px;--vd-home-gap:12px;
+ width:min(100%,calc(425px + var(--vd-peek)));max-width:none;
+ width:min(100%,calc(425px + var(--vd-peek)),calc(52svh + var(--vd-peek)));
+}
+.vd-portrait .vd-controls{justify-content:flex-start;gap:.35rem;margin:0 0 .55rem}
+.vd-portrait .vd-controls button{background:#092538;color:#e3f4f5;border-color:#6e93a9}
+.vd-portrait .vd-controls button:hover:not([aria-disabled=true]){background:#18465b;color:#f0f7f9}
+.vd-portrait .vd-controls [data-vd-motion]{background:transparent;border:0;color:#ccdfed;margin:0;padding-inline:.25rem}
+.vd-portrait .vd-index{color:#d2e6f0;min-width:3.6rem}
+.vd-portrait .vd-track{
+ grid-template-columns:repeat(var(--vd-card-total,5),calc(100% - var(--vd-peek))) calc(var(--vd-peek) - var(--vd-home-gap));
+ gap:var(--vd-home-gap);scrollbar-color:#8cabbc #112d46;padding-bottom:.4rem;
+}
+.vd-portrait .vd-track::after{content:"";display:block;min-width:0}
+.vd-portrait .vd-card{border-radius:12px;box-shadow:inset 0 0 0 1px #71a4b364}
+.vd-portrait .vd-art{aspect-ratio:3/4}
+.vd-portrait .vd-art::after{height:13%;background:linear-gradient(transparent,#061c2b 86%)}
+.vd-portrait .vd-heading{
+ left:clamp(.75rem,2.1vw,1.32rem);right:clamp(.55rem,1.4vw,1.15rem);
+ bottom:clamp(.58rem,1.4vw,1.04rem);font-size:clamp(1.04rem,2.05vw,1.92rem);
+ font-weight:780;letter-spacing:-.042em;line-height:1.13;text-wrap:pretty;
+}
+.vd-portrait .vd-card-button:focus-visible{outline-offset:-4px;border-radius:12px}
+.vd-portrait [data-vd-current=false] .vd-art{opacity:.75}
+.vd-portrait .vd-card[data-vd-current=false] .vd-heading{opacity:.74}
+.vd-portrait .vd-panel{margin-right:var(--vd-peek)}
+@media(max-width:760px){
+ .vd-portrait{--vd-peek:30px;--vd-home-gap:9px;width:min(100%,calc(340px + var(--vd-peek)));width:min(100%,calc(340px + var(--vd-peek)),calc(46svh + var(--vd-peek)))}
+ .vd-portrait .vd-heading{font-size:clamp(1.04rem,3.82vw,1.5rem)}
+ .vd-portrait .vd-controls button,.vd-portrait .vd-index{font-size:.79rem}
+}
+@media(max-width:345px){.vd-portrait .vd-controls{gap:.22rem}.vd-portrait .vd-controls button{padding-inline:.42rem}.vd-portrait .vd-index{min-width:2.7rem}}

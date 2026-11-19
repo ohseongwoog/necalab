@@ -1,50 +1,113 @@
-/* Fixed teaching examples, calculated on input. No animation loop, external model or radio hardware. */
+/* Local teaching puzzles. Targets are sampled once per page load. */
 (() => {
- 'use strict';
- const cards=Array.from(document.querySelectorAll('.micro-card[data-lab]'));
- const say=(ko,en)=>document.documentElement.lang==='en'?en:ko;
- const set=(el,s)=>{if(el.textContent!==s)el.textContent=s};
- const label=(el,s)=>el.setAttribute('aria-valuetext',s);
- function renderAI(card,slider){
-  const sensor=Number(slider.value),t=1-sensor/100,s=1-t;
-  // Each fixed observation favors a different class; blend its two normalized support scores.
-  const wifi=.90*t+.09*s,heat=.10*t+.91*s,hot=heat>wifi;
-  const name=hot?say('기기 과열','Overheating'):say('연결 문제','Wi-Fi fault');
-  card.dataset.state=hot?'hardware':'connection';
-  set(card.querySelector('[data-outcome]'),name);
-  const textPercent=Math.round(t*100);
-  const weights=say('문장 '+textPercent+'% · 센서 '+sensor+'%',textPercent+'% text · '+sensor+'% sensor');
-  set(card.querySelector('[data-meter]'),weights);
-  for(const [group,w] of [['text',t],['sensor',s]]){
-   const paths=card.querySelector('[data-net="'+group+'"]');
-   paths.setAttribute('opacity',(.24+.76*w).toFixed(2));paths.setAttribute('stroke-width',(.7+2.6*w).toFixed(2));
+'use strict';
+const AKEY=['text','sensor','log'], RKEY=['distance','angle','match'];
+const AI_START=Object.freeze([12,12,12]), RF_START=Object.freeze([14,75,19]);
+const clamp=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
+const pick=(rng,lo,hi)=>lo+Math.floor(clamp(rng(),0,1-Number.EPSILON)*(hi-lo+1));
+const one=x=>Math.round(x*10)/10;
+const aiScores=values=>values.map((v,i)=>one(.76*v+.12*values[(i+1)%3]+.12*values[(i+2)%3]));
+function aiChallenge(rng=Math.random){
+ const solution=AKEY.map(()=>pick(rng,45,87));
+ return {solution,bands:aiScores(solution).map(center=>({lo:one(center-2.5),hi:one(center+2.5)}))};
+}
+function receive([d,a,p]){
+ const fspl=20*Math.log10(4*Math.PI*d*2.45e9/299792458);
+ return -5-fspl+20*Math.log10(Math.cos(a*Math.PI/180))+10*Math.log10(p/100);
+}
+function rfChallenge(rng=Math.random){
+ const center=pick(rng,-554,-525)/10;
+ return {lo:one(center-.6),hi:one(center+.6)};
+}
+const includes=(value,{lo,hi})=>value>=lo&&value<=hi;
+const aiSolved=(values,c)=>aiScores(values).every((v,i)=>includes(v,c.bands[i]));
+const rfSolved=(values,c)=>includes(one(receive(values)),c);
+if(typeof module==='object'&&module.exports)module.exports={aiScores,aiChallenge,aiSolved,receive,rfChallenge,rfSolved,AI_START,RF_START};
+if(typeof document==='undefined')return;
+
+const ui={
+ target:['목표','Target'], goal:['성공! 세 점수가 모두 목표에 들어왔어요.','Solved! All three scores are in range.'],
+ count:['목표에 맞춘 점수','Scores in range'], up:['올리기 ↑','Raise ↑'], down:['낮추기 ↓','Lower ↓'],
+ hold:['이대로','Hold here'], aligned:['편파 맞추기 ↓','Align ↓'], misaligned:['덜 정렬 ↑','Tilt ↑'],
+ closer:['가까이 ↓','Closer ↓'], farther:['멀리 ↑','Farther ↑'], tune:['정합 개선 ↑','Match better ↑'], detune:['정합 낮추기 ↓','Match less ↓'],
+ weak:['너무 약함','Too weak'], strong:['너무 강함','Too strong'], linked:['성공! 수신 전력이 목표에 들어왔어요.','Solved! Receive power is on target.'],
+}
+const T=k=>ui[k][document.documentElement.lang==='en'?1:0];
+const val=(n,precision=1)=>n.toFixed(precision).replace('-','−');
+const bandText=(b,unit='')=>T('target')+' '+val(b.lo)+' – '+val(b.hi)+unit;
+const set=(node,value)=>{if(node.textContent!==value)node.textContent=value};
+function meter(card,key,v,b,min,max){
+ const q=s=>card.querySelector(s), span=max-min, frac=n=>(clamp((n-min)/span,0,1)*100)+'%';
+ const t=q('[data-target="'+key+'"]'),m=q('[data-marker="'+key+'"]');
+ t.style.left=frac(b.lo);t.style.width=100*(b.hi-b.lo)/span+'%';
+ m.style.left=frac(v);m.dataset.pass=String(includes(v,b));
+}
+function init(card){
+ const ai=card.dataset.lab==='ai',keys=ai?AKEY:RKEY;
+ const challenge=ai?aiChallenge():rfChallenge();
+ const q=s=>card.querySelector(s);
+ const outcome=q('[data-outcome]');
+ const knobs=keys.map(k=>q('[data-knob="'+k+'"]'));
+ card.dataset.challenge=JSON.stringify(ai?challenge.bands:challenge);
+ const fmtKnob=(key,v)=>key==='distance'?val(v)+' m':key==='angle'?val(v,0)+'°':val(v,0)+'%';
+ function knob(key,i,value,hint){
+  const s=knobs[i],display=fmtKnob(key,value);
+  s.style.setProperty('--fill',100*(value-Number(s.min))/(Number(s.max)-Number(s.min))+'%');
+  s.setAttribute('aria-valuetext',display+', '+T(hint).replace(/[↑↓]/g,'').trim());
+  set(q('[data-knob-value="'+key+'"]'),display);set(q('[data-knob-hint="'+key+'"]'),T(hint));
+ }
+ function updateAI(values){
+  const s=aiScores(values), hit=s.filter((v,i)=>includes(v,challenge.bands[i])).length;
+  card.dataset.state=hit===3?'goal':'progress';
+  keys.forEach((key,i)=>{
+   const b=challenge.bands[i],v=values[i];
+   set(q('[data-score="'+key+'"]'),val(s[i]));
+   set(q('[data-band="'+key+'"]'),bandText(b));
+   meter(card,key,s[i],b,0,100);
+   knob(key,i,v,hit===3||Math.abs(v-challenge.solution[i])<=1?'hold':v<challenge.solution[i]?'up':'down');
+  });
+  card.querySelectorAll('[data-channel]').forEach(p=>{
+   const weight=values[Number(p.dataset.channel)]/100,main=p.dataset.main==='1';
+   p.setAttribute('opacity',(.18+(main?.72:.33)*weight).toFixed(2));
+   p.setAttribute('stroke-width',(.72+(main?2.55:1.16)*weight).toFixed(2));
+  });
+  set(outcome,hit===3?T('goal'):T('count')+' '+hit+' / 3');
+ }
+ function updateRF(values){
+  const [d,a,p]=values, power=one(receive(values)),b=challenge,goal=includes(power,b),weak=power<b.lo;
+  card.dataset.state=goal?'goal':weak?'weak':'strong';
+  set(q('[data-score="power"]'),val(power)+' dBm');set(q('[data-band="power"]'),bandText(b,' dBm'));
+  meter(card,'power',power,b,-90,-49);
+  const hints=goal?['hold','hold','hold']:weak?
+    [d>2?'closer':'hold',a>0?'aligned':'hold',p<100?'tune':'hold']:
+    [d<14?'farther':'hold',a<75?'misaligned':'hold',p>19?'detune':'hold'];
+  keys.forEach((key,i)=>knob(key,i,values[i],hints[i]));
+  const end=118+(d-2)*21.2, line=q('[data-wave]'),amp=8.2*Math.sqrt(p/100);
+  let path='M52 43';
+  for(let i=1;i<=118;i++){
+   const t=i/118,x=52+(end-52)*t,fade=Math.min(1,(x-52)/4,(end-x)/4);
+   const y=43-amp*2/(2+(d-2)*t)*Math.sin(2*Math.PI*(x-52)/22)*fade;
+   path+='L'+x.toFixed(2)+' '+y.toFixed(2);
   }
-  slider.style.setProperty('--pos',sensor+'%');label(slider,weights+', '+name);
+  line.setAttribute('d',path);
+  q('[data-receiver]').setAttribute('transform','translate('+end.toFixed(2)+',0)');
+  q('[data-rf-axis]').setAttribute('transform','rotate('+a+' 0 43)');
+  q('[data-rf-light]').setAttribute('fill',goal?'#80efb4':weak?'#9cb7c9':'#ffc992');
+  set(outcome,T(goal?'linked':weak?'weak':'strong'));
  }
- function wave(end,distance){
-  const span=end-68,segments=112;let out='M68 23';
-  for(let i=1;i<=segments;i++){const t=i/segments,x=68+span*t,edge=Math.min(1,(x-68)/3,(end-x)/3);
-   const y=23-(8.8*2/(2+(distance-2)*t))*Math.sin(2*Math.PI*(x-68)/23)*edge;
-   out+='L'+x.toFixed(2)+' '+y.toFixed(2);
-  }return out;
- }
- function renderRF(card,slider){
-  const m=Number(slider.value),rx=-5-20*Math.log10(4*Math.PI*m*2.45e9/299792458),up=rx>=-63;
-  const name=up?say('연결됨','Connected'):say('연결 끊김','Disconnected');
-  card.dataset.state=up?'connected':'disconnected';
-  const end=130+(m-2)*7.2;
-  card.querySelector('[data-wave]').setAttribute('d',wave(end,m));
-  card.querySelector('[data-receiver]').setAttribute('transform','translate('+end.toFixed(2)+',0)');
-  card.querySelector('[data-rx-label]').setAttribute('x',(end+13).toFixed(2));
-  set(card.querySelector('[data-outcome]'),name);
-  const pow=rx.toFixed(1).replace('-','−')+' dBm',distance=m.toFixed(1)+' m';
-  set(card.querySelector('[data-meter]'),distance+' · '+pow);
-  slider.style.setProperty('--pos',((m-2)/12*100)+'%');label(slider,distance+', '+pow+', '+name);
- }
- for(const card of cards){
-  const slider=card.querySelector('input[type=range]'),outcome=card.querySelector('[data-outcome]');
-  outcome.setAttribute('role','status');outcome.setAttribute('aria-live','polite');outcome.setAttribute('aria-atomic','true');
-  const render=()=> (card.dataset.lab==='ai'?renderAI:renderRF)(card,slider);
-  slider.disabled=false;slider.addEventListener('input',render);document.addEventListener('neca:lang',render);render();
- }
+ const refresh=()=>{const values=knobs.map(s=>Number(s.value));ai?updateAI(values):updateRF(values)};
+ knobs.forEach(s=>{s.disabled=false;s.addEventListener('input',refresh)});
+ document.addEventListener('neca:lang',refresh);
+ refresh();
+}
+document.querySelectorAll('.micro-card[data-lab]').forEach(init);
+const anchors=new Set(['#hands-on','#lab-ai','#lab-rf','#puzzle-ai','#puzzle-rf']);
+function settlePuzzleAnchor(){
+ if(!anchors.has(location.hash))return;
+ document.getElementById(location.hash.slice(1))?.scrollIntoView({behavior:'instant',block:'start',inline:'nearest'});
+}
+if(document.readyState==='complete')settlePuzzleAnchor();
+else window.addEventListener('load',settlePuzzleAnchor,{once:true});
+window.addEventListener('hashchange',settlePuzzleAnchor);
+
 })();

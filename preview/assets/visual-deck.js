@@ -4,7 +4,7 @@
 const reduce=matchMedia('(prefers-reduced-motion: reduce)');
 const galleries=[...document.querySelectorAll('[data-visual-deck]')];
 for(const box of galleries){
- const q=s=>box.querySelector(s);
+ const q=s=>box.querySelector(s),portrait=box.classList.contains('vd-portrait');
  const track=q('[data-deck-track]'),controls=q('.vd-controls'),idx=q('[data-deck-index]');
  const prev=q('[data-deck-prev]'),next=q('[data-deck-next]'),motion=q('[data-vd-motion]'),cards=[...box.querySelectorAll('[data-deck-card]')];
  const actions=cards.map(card=>card.querySelector('[data-vd-open]'));
@@ -54,14 +54,16 @@ for(const box of galleries){
   track.scrollTo({left,top:0,behavior:'instant'});set(i);
   if(focus)actions[i].focus({preventScroll:true});
  }
- function open(i){
+ function open(i,viaKeyboard=false){
   if(i===opened){close(true);return}
   close();opened=i;const a=actions[i],p=panels[i],title=a.querySelector('.vd-heading').textContent;
   a.setAttribute('aria-expanded','true');a.setAttribute('aria-label',title+': hide explanation');
   cards[i].dataset.vdReveal='true';p.hidden=false;p.focus({preventScroll:true});
   clearTimeout(effectTimer);effect=reduce.matches||paused?-1:i;draw();
   if(effect>=0)effectTimer=setTimeout(()=>{effect=-1;draw()},2670);
-  if(p.getBoundingClientRect().bottom>window.innerHeight)p.scrollIntoView({block:'nearest',behavior:'instant'});
+  // Keep the portrait image in view during a touch/pointer-triggered reveal.
+  // Keyboard focus and reduced-motion users can still go straight to its explanation.
+  if((!portrait||viaKeyboard||reduce.matches||paused)&&p.getBoundingClientRect().bottom>window.innerHeight)p.scrollIntoView({block:'nearest',behavior:'instant'});
  }
  motion.addEventListener('click',()=>{paused=!paused;if(paused){clearTimeout(effectTimer);effect=-1}draw()});
  prev.addEventListener('click',()=>{if(current>0)go(current-1)});
@@ -84,7 +86,7 @@ for(const box of galleries){
  actions.forEach((btn,i)=>btn.addEventListener('click',e=>{
   const swipe=e.detail>0&&gesture&&(gesture.moved||Math.abs(gesture.left-track.scrollLeft)>7);
   gesture=null;if(swipe)return;
-  if(i!==current)go(i);open(i);
+  if(i!==current)go(i);open(i,e.detail===0);
  }));
  panels.forEach(panel=>panel.querySelector('[data-vd-close]').addEventListener('click',()=>close(true)));
  function revealHash(){

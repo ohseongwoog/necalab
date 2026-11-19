@@ -3,6 +3,7 @@ from hashlib import sha256
 from html import escape
 from pathlib import Path
 import xml.etree.ElementTree as ET
+from portrait_art import portrait
 
 BASE = Path(__file__).resolve().parent
 SVG_NS = 'http://www.w3.org/2000/svg'
@@ -43,8 +44,14 @@ def deck(fields, rich=False):
         copy = r['summary']
         panel = f'visual-{key}-{field}-detail'
         src = r['image']
-        art_url = src + '?v=' + sha256((BASE/src).read_bytes()).hexdigest()[:9]
-        cards.append(f'''<article class="vd-card" data-deck-card id="{x(field)}" data-field="{x(field)}"><button type="button" class="vd-card-button" data-vd-open aria-expanded="false" aria-controls="{x(panel)}" aria-label="{x(title)}: show explanation"><span class="vd-art"><img src="{x(art_url)}" alt="" width="800" height="400" decoding="async" {"fetchpriority='high'" if rich and n == 0 else "loading='lazy'"}>{overlay(src)}</span><span class="vd-heading">{x(title)}</span></button></article>''')
+        if rich:
+            art_url = src + '?v=' + sha256((BASE/src).read_bytes()).hexdigest()[:9]
+            fx = overlay(src)
+            width, height = 800, 400
+        else:
+            art_url, fx = portrait(src, field)
+            width, height = 450, 600
+        cards.append(f'''<article class="vd-card" data-deck-card id="{x(field)}" data-field="{x(field)}"><button type="button" class="vd-card-button" data-vd-open aria-expanded="false" aria-controls="{x(panel)}" aria-label="{x(title)}: show explanation"><span class="vd-art"><img src="{x(art_url)}" alt="" width="{width}" height="{height}" decoding="async" {"fetchpriority='high'" if n == 0 else "loading='lazy'"}>{fx}</span><span class="vd-heading">{x(title)}</span></button></article>''')
         example = r.get('example')
         link = ''
         if not rich:
@@ -54,4 +61,6 @@ def deck(fields, rich=False):
             link = f'<a class="vd-reference" href="{x(example["href"])}">{name}</a>'
         fallback.append(f'<details class="vd-static"><summary>{x(title)}</summary><p>{x(copy)}</p>{link}</details>')
         panels.append(f'''<section class="vd-panel" id="{x(panel)}" data-vd-panel hidden tabindex="-1" aria-labelledby="{x(panel)}-title"><h3 id="{x(panel)}-title" data-vd-result>{x(result)}</h3><p>{x(copy)}</p>{link}<button type="button" class="vd-close" data-vd-close>Close explanation</button></section>''')
-    return f'''<div class="visual-deck" data-deck data-visual-deck lang="en" role="region" aria-label="Research gallery"><div class="vd-controls" hidden><button type="button" data-deck-prev aria-controls="{track}" aria-label="Previous research field">Previous</button><span class="vd-index" data-deck-index aria-live="polite" aria-atomic="true"></span><button type="button" data-deck-next aria-controls="{track}" aria-label="Next research field">Next</button><button type="button" data-vd-motion aria-pressed="false">Pause motion</button></div><div class="vd-track" data-deck-track id="{track}" tabindex="0" aria-label="Research fields. Swipe or use the arrow keys to browse.">{''.join(cards)}</div>{''.join(panels)}<noscript>{''.join(fallback)}</noscript></div>'''
+    presentation = 'visual-deck' if rich else 'visual-deck vd-portrait'
+    size = '' if rich else f' style="--vd-card-total:{len(cards)}"'
+    return f'''<div class="{presentation}"{size} data-deck data-visual-deck lang="en" role="region" aria-label="Research gallery"><div class="vd-controls" hidden><button type="button" data-deck-prev aria-controls="{track}" aria-label="Previous research field">Previous</button><span class="vd-index" data-deck-index aria-live="polite" aria-atomic="true"></span><button type="button" data-deck-next aria-controls="{track}" aria-label="Next research field">Next</button><button type="button" data-vd-motion aria-pressed="false">Pause motion</button></div><div class="vd-track" data-deck-track id="{track}" tabindex="0" aria-label="Research fields. Swipe or use the arrow keys to browse.">{''.join(cards)}</div>{''.join(panels)}<noscript>{''.join(fallback)}</noscript></div>'''
